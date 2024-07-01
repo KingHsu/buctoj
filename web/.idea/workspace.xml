@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="6ec21296-2ec0-439a-bb44-50b14f8dbc56" name="Changes" comment="Changes" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="28dPdYXueDQwaL9mOrzQsPwWoXZ" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/WebStormProjects/buctoj&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;D:\\WebStorm 2024.1.5\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\svnProject\producer\coder\src\views\studentBox" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="serve" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="serve" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-WS-241.18034.50" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6ec21296-2ec0-439a-bb44-50b14f8dbc56" name="Changes" comment="" />
+      <created>1651543580552</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1651543580552</updated>
+      <workItem from="1651543582459" duration="1881000" />
+      <workItem from="1651712071749" duration="54000" />
+      <workItem from="1652061565110" duration="612000" />
+      <workItem from="1652598097769" duration="1127000" />
+      <workItem from="1652769719693" duration="244000" />
+      <workItem from="1653439714573" duration="618000" />
+      <workItem from="1653441161333" duration="638000" />
+      <workItem from="1653443378429" duration="2500000" />
+      <workItem from="1653527122705" duration="4981000" />
+      <workItem from="1655427351191" duration="7450000" />
+      <workItem from="1655436034183" duration="42000" />
+      <workItem from="1655436302177" duration="492000" />
+      <workItem from="1655436820144" duration="147000" />
+      <workItem from="1655436986935" duration="95000" />
+      <workItem from="1655437093266" duration="112000" />
+      <workItem from="1655438435988" duration="30000" />
+      <workItem from="1655438494584" duration="9000" />
+      <workItem from="1655449578775" duration="51000" />
+      <workItem from="1655794688589" duration="384000" />
+      <workItem from="1656381947157" duration="107000" />
+      <workItem from="1656382304243" duration="5864000" />
+      <workItem from="1719758153902" duration="50000" />
+      <workItem from="1719758211574" duration="54000" />
+      <workItem from="1719796843604" duration="1045000" />
+      <workItem from="1719800255209" duration="669000" />
+      <workItem from="1719808536249" duration="222000" />
+      <workItem from="1719826312259" duration="731000" />
+      <workItem from="1719827096991" duration="2812000" />
+      <workItem from="1719829946758" duration="2513000" />
+      <workItem from="1719835515175" duration="37000" />
+    </task>
+    <task id="LOCAL-00001" summary="Changes">
+      <option name="closed" value="true" />
+      <created>1719834363940</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1719834363940</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changes" />
+  </component>
+</project>
