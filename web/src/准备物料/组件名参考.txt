@@ -1,0 +1,16 @@
+首页的组件：
+BuctojHeaderNav
+BuctojChart
+BuctojSmartTraining
+BuctojOverContestList
+BuctojComingContestList
+BuctojCfRanking
+BuctojAcRanking
+
+BuctojHeaderNav => 顶部导航
+BuctojChart => 提交数图表
+BuctojSmartTraining =>智能训练
+BuctojOverContestList => 已结束比赛列表
+BuctojComingContestList => 即将到来比赛列表
+BuctojCfRanking => Codeforces排名
+BuctojAcRanking => Atcoder排名
