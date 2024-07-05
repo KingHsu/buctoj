@@ -9,4 +9,7 @@ public class Student {
     private String stuClass;
     private String stuAcId;
     private String stuCfId;
+    private String stuPassword;
+    private String stuMan;
+    private String stuUsername;
 }
