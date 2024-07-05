@@ -1,12 +1,7 @@
 import requests
 from lxml import etree
 import csv
-
-headers = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
-
-}
-
+headers = {   "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"}
 with open('cf.csv', mode='a', encoding='utf-8', newline='') as file:
     for j in range(1, 11):
         url = "https://codeforces.com/contests/with/Vanthoci"
@@ -35,7 +30,6 @@ with open('cf.csv', mode='a', encoding='utf-8', newline='') as file:
             hour = hour.split('=')[1]
             min_ = min_.split('=')[1]
             sec = sec.split('=')[1]
-
             # 格式化日期和时间
             formatted_time = f"{year}-{month}-{day} {hour}-{min_}-{sec}"
             t4 = i.xpath('./td[4]/a/text()')[0]

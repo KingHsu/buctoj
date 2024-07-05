@@ -1,12 +1,10 @@
 import requests
 from lxml import etree
 import csv
-
 headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
 
 }
-
 with open('ac.csv', mode='a', encoding='utf-8', newline='') as file:
     for j in range(71, 81):
         url = "https://atcoder.jp/users/ZZXzzx0_0/history"

@@ -67,9 +67,19 @@ CREATE TABLE `student` (
   `stu_username` varchar(255) DEFAULT NULL COMMENT '登录用户名',
   PRIMARY KEY (`stu_no`) USING BTREE
 ) ;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `table01` AS select `student`.`stu_name` AS `stu_name`,sum(`atcoder`.`ac_count`) AS `ac_count`,sum(`codeforces`.`cf_sum_contest`) AS `cf_count` from ((`atcoder` join `codeforces`) join `student`) where ((`student`.`stu_ac_id` = `atcoder`.`ac_id`) and (`student`.`stu_cf_id` = `codeforces`.`cf_id`)) group by `student`.`stu_name`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `table02` AS select `student`.`stu_name` AS `stu_name`,min(`codeforces`.`cf_old_rating`) AS `cf_old_rating`,max(`codeforces`.`cf_new_rating`) AS `cf_new_rating` from (`codeforces` join `student`) where (`codeforces`.`cf_id` = `student`.`stu_cf_id`) group by `student`.`stu_name`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `table03` AS select sum(`atcoder`.`ac_maxRating`) AS `Sum_ac_Rating`,sum(`codeforces`.`cf_new_rating`) AS `Sum_cf_Rating`,`student`.`stu_class` AS `stu_class` from ((`student` join `atcoder`) join `codeforces`) where ((`student`.`stu_ac_id` = `atcoder`.`ac_id`) and (`student`.`stu_cf_id` = `codeforces`.`cf_id`)) group by `student`.`stu_class`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `table01` AS select `student`.
+    `stu_name` AS `stu_name`,sum(`atcoder`.`ac_count`) AS `ac_count`,sum(`codeforces`.`cf_sum_contest`) AS `cf_count`
+    from ((`atcoder` join `codeforces`) join `student`) where ((`student`.`stu_ac_id` = `atcoder`.`ac_id`)
+    and (`student`.`stu_cf_id` = `codeforces`.`cf_id`)) group by `student`.`stu_name`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `table02` AS
+       select `student`.`stu_name` AS `stu_name`,min(`codeforces`.`cf_old_rating`) AS `cf_old_rating`,
+              max(`codeforces`.`cf_new_rating`) AS `cf_new_rating` from (`codeforces` join `student`)
+       where (`codeforces`.`cf_id` = `student`.`stu_cf_id`) group by `student`.`stu_name`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `table03` AS
+       select sum(`atcoder`.`ac_maxRating`) AS `Sum_ac_Rating`,sum(`codeforces`.`cf_new_rating`) AS `Sum_cf_Rating`,
+              `student`.`stu_class` AS `stu_class` from ((`student` join `atcoder`) join `codeforces`)
+              where ((`student`.`stu_ac_id` = `atcoder`.`ac_id`) and (`student`.`stu_cf_id` = `codeforces`.`cf_id`))
+              group by `student`.`stu_class`;
 BEGIN;
 LOCK TABLES `oj`.`ac_contest` WRITE;
 DELETE FROM `oj`.`ac_contest`;
