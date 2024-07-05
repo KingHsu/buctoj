@@ -1,87 +1,56 @@
 <template>
   <div id="app">
-    <div class="main">
-      <div class="top">
-        <!-- 顶部导航 -->
-      <BuctojHeaderNav></BuctojHeaderNav>
-      </div>
-      <div class="under">
-        <div class="left">
-          <!-- 提交数图表 -->
-          <BuctojChart></BuctojChart>
-          <!-- 智能训练 -->
-          <BuctojSmartTraining></BuctojSmartTraining>
-          <!-- 已结束比赛列表 -->
-          <BuctojOverContestList></BuctojOverContestList>
-          <!-- 即将开始比赛列表 -->
-          <BuctojComingContestList></BuctojComingContestList>
-        </div>
-        <div class="right">
-          <!-- Codeforces排名 -->
-          <BuctojCfRanking></BuctojCfRanking>
-          <!-- Atcoder排名 -->
-          <BuctojAcRanking></BuctojAcRanking>
-        </div>
-      </div>
-      
+    <div class="footer_wrap">
+        <a href="#/OjIndex">首页</a>
+        <a href="#/OjUserList">用户列表</a>
+        <a href="#/OjCodeforces">Codeforces</a>
+        <a href="#/OjAtcoder">Atcoder</a>
+        <a href="#/OjCharts">图表</a>
+        <a href="#/OjSign">登录</a>
+        <a href="#/OjRegister">注册</a>
+    </div>
+    <div class="top">
+      <router-view></router-view>
     </div>
   </div>
   
 </template>
 
 <script>
-import BuctojAcRanking from './components/BuctojAcRanking.vue'
-import BuctojCfRanking from './components/BuctojCfRanking.vue'
-import BuctojChart from './components/BuctojChart.vue'
-import BuctojComingContestList from './components/BuctojComingContestList.vue'
-import BuctojHeaderNav from './components/BuctojHeaderNav.vue'
-import BuctojOverContestList from './components/BuctojOverContestList.vue'
-import BuctojSmartTraining from './components/BuctojSmartTraining.vue'
+
+
 
 export default {
   name: 'App',
-  components: {
-    BuctojHeaderNav,
-    BuctojChart,
-    BuctojSmartTraining,
-    BuctojOverContestList,
-    BuctojComingContestList,
-    BuctojCfRanking,
-    BuctojAcRanking
-  }
+  
 }
 </script>
 
 <style scoped>
-  .main {
-    display: block;
-    
+  body {
+    margin: 0;
+    padding: 0;
   }
-  .top {
+  .footer_wrap {
+    position: relative;
+    left: 0;
+    top: 0;
     display: flex;
+    width: 100%;
+    text-align: center;
+    background-color: #333;
+    color: #ccc;
   }
-  .under {
-    display:  flex;
-  }
-  .left {
-    align-items: center;
+  .footer_wrap a {
     flex: 1;
-    background-color: rgb(255, 255, 255);
-    margin: 5% 5% 0 10%;
-    border: 0.25px #ffffff;
-    border-radius: 2.5px;
-    box-shadow: 0 0 2.5px 0 #000;
-    
+    text-decoration: none;
+    padding: 20px 0;
+    line-height: 20px;
+    background-color: #333;
+    color: #ccc;
+    border: 1px solid black;
   }
-  .right{
-    align-items: center;
-    width: 300px;
-    background-color: rgb(255, 255, 255);
-    margin: 5% 5% 10% 30px;
-    border:  0.25px #ffffff;
-    border-radius: 2.5px;
-    box-shadow: 0 0 2.5px 0 #000;
+  .footer_wrap a:hover {
+    background-color: #555;
   }
-
-
 </style>
