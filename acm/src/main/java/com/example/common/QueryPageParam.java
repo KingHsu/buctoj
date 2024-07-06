@@ -8,7 +8,7 @@ import java.util.HashMap;
 @Data
 public class QueryPageParam {
     //默认
-    private static int PAGE_SIZE=15;
+    private static int PAGE_SIZE=12;
     private static int PAGE_NUM=1;
 
     private int pageSize=PAGE_SIZE;

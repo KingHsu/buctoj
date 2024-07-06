@@ -1,9 +1,13 @@
 package com.example.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 @Data
+@TableName("student")
 public class Student {
+    @TableId
     private String stuNo;
     private String stuName;
     private String stuClass;
@@ -12,4 +16,5 @@ public class Student {
     private String stuPassword;
     private String stuMan;
     private String stuUsername;
+    private String stuNum;
 }
