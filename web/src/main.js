@@ -12,9 +12,12 @@ import OjAtcoder from './views/OjAtcoder.vue'
 import OjCharts from './views/OjCharts.vue'
 import OjSign from './views/OjSign.vue'
 import OjRegister from './views/OjRegister.vue'
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
 Vue.prototype.$echarts = echarts
 Vue.config.productionTip = false
 Vue.use(VueRouter)
+Vue.use(ElementUI)
 
 const router = new VueRouter({
   routes: [
