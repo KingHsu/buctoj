@@ -92,7 +92,35 @@ export default {
       tableData: Array(20).fill(item)
     }
   },
-
+  methods: {
+    loadGet() {
+      this.$axios.get(this.$httpUrl + '/user/list').then(res => res.data).then(res => {
+        console.log(res)
+      })
+    },
+    loadPost() {
+      this.$axios.post(this.$httpUrl + '/user/listPageC1', {
+        pageSize: this.pageSize,
+        pageNum: this.pageNum,
+        param: {
+          name: this.name,
+          sex: this.sex
+        }
+      }).then(res => res.data).then(res => {
+        console.log(res)
+        if (res.code == 200) {
+          this.tableData = res.data
+          this.total = res.total
+        } else {
+          alert('获取数据失败')
+        }
+      })
+    }
+  },
+  beforeMount() {
+    //this.loadGet();
+    this.loadPost()
+  }
 }
 </script>
 

@@ -14,6 +14,8 @@ import OjSign from './views/OjSign.vue'
 import OjRegister from './views/OjRegister.vue'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+Vue.prototype.$axios=axios;
+Vue.prototype.$httpUrl='http://localhost:8090'
 Vue.prototype.$echarts = echarts
 Vue.config.productionTip = false
 Vue.use(VueRouter)
