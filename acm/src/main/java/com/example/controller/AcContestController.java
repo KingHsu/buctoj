@@ -2,6 +2,9 @@ package com.example.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.common.QueryPageParam;
 import com.example.common.Result;
 import com.example.entity.AcContest;
 import com.example.service.AcContestService;

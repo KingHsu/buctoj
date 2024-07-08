@@ -4,7 +4,7 @@ package com.example.entity;
 import lombok.Data;
 
 @Data
-public class Atcoder {
+public class AtCoder {
     private String acId;
     private String acDate;
     private String acContest;
