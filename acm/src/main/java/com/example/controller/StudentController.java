@@ -62,22 +62,22 @@ public class StudentController {
     @PostMapping("/listP")
     public Result listP(@RequestBody Student student){
         LambdaQueryWrapper<Student> lambdaQueryWrapper = new LambdaQueryWrapper<>();
-        if(student.getStuUsername()!=null)
-            lambdaQueryWrapper.like(Student::getStuUsername,student.getStuUsername());
+        if(student.getStuNum()!=null)
+            lambdaQueryWrapper.like(Student::getStuNum,student.getStuNum());
         return Result.suc(studentService.list(lambdaQueryWrapper));
     }
 
     //分页查询
     @PostMapping("/listPage")
     public Result listPage(@RequestBody QueryPageParam query){
-        String name= (String) query.getParam().get("studentUsername");
+        String name= (String) query.getParam().get("stuNum");
 
         Page<Student> page=new Page<>();
         page.setCurrent(query.getPageNum());
         page.setSize(query.getPageSize());
         LambdaQueryWrapper<Student> lambdaQueryWrapper = new LambdaQueryWrapper<>();
         if(name!=null&&!"null".equals(name))
-            lambdaQueryWrapper.like(Student::getStuUsername,name);
+            lambdaQueryWrapper.like(Student::getStuNum,name);
 
         IPage<Student> result=studentService.page(page,lambdaQueryWrapper);
 
