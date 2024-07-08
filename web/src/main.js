@@ -7,7 +7,7 @@ import echarts from 'echarts'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import axios from 'axios'
-import router from './router/index.js'
+import router from './router'
 Vue.prototype.$echarts = echarts
 Vue.prototype.$axios = axios
 Vue.prototype.$httpUrl = 'http://localhost:9090'

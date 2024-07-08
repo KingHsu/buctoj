@@ -34,6 +34,7 @@ import BuctojComingContestList from '../components/BuctojComingContestList.vue'
 import BuctojOverContestList from '../components/BuctojOverContestList.vue'
 import BuctojSmartTraining from '../components/BuctojSmartTraining.vue'
 export default {
+  name: 'OjIndex',
     components: {
     // BuctojHeaderNav,
     BuctojChart,
