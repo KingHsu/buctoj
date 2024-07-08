@@ -97,9 +97,6 @@ export default {
     this.InitCharts()
   }
 }
-
-
-
 </script>
   
 <style scoped>

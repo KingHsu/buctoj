@@ -1,13 +1,13 @@
 <template>
   <div id="app">
     <div class="footer_wrap">
-        <a href="#/OjIndex">首页</a>
-        <a href="#/OjUserList">用户列表</a>
-        <a href="#/OjCodeforces">Codeforces</a>
-        <a href="#/OjAtcoder">Atcoder</a>
-        <a href="#/OjCharts">图表</a>
-        <a href="#/OjSign">登录</a>
-        <a href="#/OjRegister">注册</a>
+        <router-link to="/OjIndex">首页</router-link>
+        <router-link to="/OjUserList">用户列表</router-link>
+        <router-link to="/OjCodeforces">Codeforces</router-link>
+        <router-link to="/Ojrouter-linktcoder">Atcoder</router-link>
+        <router-link to="/OjChrouter-linkrts">图表</router-link>
+        <router-link to="/OjSign">登录</router-link>
+        <router-link to="/OjRegister">注册</router-link>
     </div>
     <div class="top">
       <router-view></router-view>
@@ -17,9 +17,6 @@
 </template>
 
 <script>
-
-
-
 export default {
   name: 'App',
   
@@ -40,6 +37,9 @@ export default {
     text-align: center;
     background-color: #333;
     color: #ccc;
+  }
+  .footer_wrap a.router-link-active {
+    background-color: purple;
   }
   .footer_wrap a {
     flex: 1;

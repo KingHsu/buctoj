@@ -50,7 +50,7 @@
           </el-submenu>
         </el-menu>
       </el-aside>
-
+      
       <el-container>
         <el-header style="text-align: right; font-size: 12px">
           <el-dropdown>
@@ -63,7 +63,7 @@
           </el-dropdown>
           <span>王小虎</span>
         </el-header>
-
+        
         <el-main>
           <el-table :data="tableData">
             <el-table-column prop="date" label="日期" width="140">
@@ -93,32 +93,38 @@ export default {
     }
   },
   methods: {
-    loadGet() {
-      this.$axios.get(this.$httpUrl + '/user/list').then(res => res.data).then(res => {
+    loadGet(){
+      this.$axios.get(this.$httpUrl + '/student/list').then(res=>{
         console.log(res)
       })
     },
-    loadPost() {
-      this.$axios.post(this.$httpUrl + '/user/listPageC1', {
-        pageSize: this.pageSize,
-        pageNum: this.pageNum,
-        param: {
-          name: this.name,
-          sex: this.sex
-        }
-      }).then(res => res.data).then(res => {
+    loadPost(){
+      this.$axios.post(this.$httpUrl+'/student/listPage',{
+          pageSize:this.pageSize,
+          pageNum:this.pageNum,
+          param:{
+              name:this.name,
+              sex:this.sex
+          }
+      }).then(res=>res.data).then(res=>{
+          console.log(res)
+          if(res.code==200){
+              this.tableData=res.data
+              this.total=res.total
+          }else{
+              alert('获取数据失败')
+          }
+
+      })
+    },
+    loadPut(){
+      this.$axios.put(this.$httpUrl + '/student').then(res=>{
         console.log(res)
-        if (res.code == 200) {
-          this.tableData = res.data
-          this.total = res.total
-        } else {
-          alert('获取数据失败')
-        }
       })
     }
   },
-  beforeMount() {
-    //this.loadGet();
+  beforeMount(){
+    this.loadGet()
     this.loadPost()
   }
 }
