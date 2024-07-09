@@ -7,26 +7,23 @@ import com.example.common.QueryPageParam;
 import com.example.common.Result;
 import com.example.entity.CfContest;
 import com.example.service.CfContestService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("/cfContest")
+@Api(tags = "codeforces比赛列表")
 public class CfContestController {
     @Autowired
     private CfContestService cfcontestService;
 
-    // 查询全部
-    @GetMapping("/list")
-    public List<CfContest> list() {
-        return cfcontestService.list();
-    }
-
 
     // 根据比赛名称模糊查询
     @PostMapping("/listP")
+    @ApiOperation("根据比赛名称模糊查询")
     public Result listP(@RequestBody CfContest cfcontest) {
         LambdaQueryWrapper<CfContest> queryWrapper = new LambdaQueryWrapper<>();
         if (cfcontest.getCfContest() != null) {
@@ -37,6 +34,7 @@ public class CfContestController {
 
     // 分页查询
     @PostMapping("/listPage")
+    @ApiOperation("分页查询")
     public Result listPage(@RequestBody QueryPageParam query) {
         String name = (String) query.getParam().get("cfContest");
 
