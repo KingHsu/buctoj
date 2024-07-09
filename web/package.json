@@ -13,7 +13,11 @@
     "echarts": "^5.5.1",
     "element-ui": "^2.15.14",
     "vue": "^2.6.14",
+<<<<<<< HEAD
     "vue-router": "^3.5.2"
+=======
+    "vue-router": "3.6.5"
+>>>>>>> c621415194a1cef042deced04105367a642debac
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
