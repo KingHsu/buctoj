@@ -11,11 +11,10 @@ import router from './router'
 Vue.prototype.$echarts = echarts
 Vue.prototype.$axios = axios
 Vue.prototype.$httpUrl = 'http://localhost:9090'
+
 Vue.config.productionTip = false
 
 Vue.use(ElementUI)
-
-
 
 new Vue({
   render: h => h(App),
