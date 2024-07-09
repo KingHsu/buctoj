@@ -94,12 +94,12 @@ export default {
   },
   methods: {
     loadGet() {
-      this.$axios.get(this.$httpUrl + '/user/list').then(res => res.data).then(res => {
+      this.$axios.get(this.$httpUrl + '/student/list').then(res => res.data).then(res => {
         console.log(res)
       })
     },
     loadPost() {
-      this.$axios.post(this.$httpUrl + '/user/listPageC1', {
+      this.$axios.post(this.$httpUrl + '/student/listPage', {
         pageSize: this.pageSize,
         pageNum: this.pageNum,
         param: {
