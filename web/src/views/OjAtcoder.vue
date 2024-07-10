@@ -1,102 +1,103 @@
 <template>
   <div>
     <h1>Atcoder 比赛列表</h1>
-    <div>
-      <label for="search">比赛名称：</label>
-      <input type="text" v-model="searchQuery" @input="fetchContests" placeholder="输入比赛名称进行搜索">
-    </div>
-    <table>
-      <thead>
-      <tr>
-        <th>比赛ID</th>
-        <th>比赛名称</th>
-        <th>类型</th>
-        <th>日期</th>
-        <th>时间</th>
-        <th>参与人数</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr v-for="contest in contests" :key="contest.acContestId">
-        <td>{{ contest.acContestId }}</td>
-        <td>{{ contest.acContest }}</td>
-        <td>{{ contest.acType }}</td>
-        <td>{{ contest.acDate }}</td>
-        <td>{{ contest.acTime }}</td>
-        <td>{{ contest.acNum }}</td>
-      </tr>
-      </tbody>
-    </table>
-    <div>
-      <button @click="prevPage" :disabled="pageNum === 1">上一页</button>
-      <button @click="nextPage" :disabled="contests.length < pageSize">下一页</button>
+    <el-input
+      v-model="searchQuery"
+      placeholder="输入比赛名称进行搜索"
+      @input="fetchContests"
+      style="margin-bottom: 20px;">
+    </el-input>
+    <el-table :data="filteredContests" style="width: 100%">
+      <el-table-column prop="acContestId" label="比赛ID" width="100"></el-table-column>
+      <el-table-column prop="acContest" label="比赛名称"></el-table-column>
+      <el-table-column prop="acType" label="类型" width="100"></el-table-column>
+      <el-table-column prop="acDate" label="日期" width="180"></el-table-column>
+      <el-table-column prop="acTime" label="时间" width="100"></el-table-column>
+      <el-table-column prop="acNum" label="参与人数" width="100"></el-table-column>
+    </el-table>
+    <div style="text-align: center; margin-top: 20px;">
+      <el-button @click="prevPage" :disabled="pageNum === 1">上一页</el-button>
+      <el-button @click="nextPage" :disabled="contests.length < pageSize">下一页</el-button>
     </div>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
-
 export default {
-  data() {
+  data () {
     return {
-      contests: [],
+      contests: [
+        {
+          acContestId: '1499',
+          acContest: 'TOYOTA SYSTEMS Programming Contest 2023(AtCoder Beginner Contest 330)',
+          acType: 'abc',
+          acDate: '2023/11/25 20:00:00',
+          acTime: '01:40:00',
+          acNum: '2'
+        },
+        {
+          acContestId: '1500',
+          acContest: 'atcoder SYSTEMS Programming Contest 2023(AtCoder Beginner Contest 331)',
+          acType: 'abc',
+          acDate: '2023/11/26 20:00:00',
+          acTime: '01:40:00',
+          acNum: '3'
+        },
+        {
+          acContestId: '1501',
+          acContest: 'TOA SYSTEMS Programming Contest 2023(AtCoder Beginner Contest 332)',
+          acType: 'abc',
+          acDate: '2023/11/27 20:00:00',
+          acTime: '01:40:00',
+          acNum: '4'
+        }
+        // 继续添加更多模拟数据...
+      ],
       pageNum: 1,
       pageSize: 10,
       searchQuery: ''
-    };
+    }
   },
-  mounted() {
-    this.fetchContests();
+  computed: {
+    filteredContests () {
+      // 模糊查询和分页过滤
+      const filtered = this.contests.filter(contest =>
+        contest.acContest.toLowerCase().includes(this.searchQuery.toLowerCase())
+      )
+      const start = (this.pageNum - 1) * this.pageSize
+      const end = this.pageNum * this.pageSize
+      return filtered.slice(start, end)
+    }
   },
   methods: {
-    fetchContests() {
-      axios.post('/accontest/listPage', {
-        pageNum: this.pageNum,
-        pageSize: this.pageSize,
-        param: {
-          acContest: this.searchQuery
-        }
-      })
-          .then(response => {
-            this.contests = response.data.data;
-          })
-          .catch(error => {
-            console.error("There was an error fetching the contests!", error);
-          });
+    fetchContests () {
+      // 模拟数据，不需要实际请求
+      console.log('Fetching contests...')
     },
-    nextPage() {
-      this.pageNum++;
-      this.fetchContests();
+    nextPage () {
+      if ((this.pageNum * this.pageSize) < this.contests.length) {
+        this.pageNum++
+      }
     },
-    prevPage() {
+    prevPage () {
       if (this.pageNum > 1) {
-        this.pageNum--;
-        this.fetchContests();
+        this.pageNum--
       }
     }
   }
-};
+}
 </script>
 
 <style scoped>
-table {
-  width: 100%;
-  border-collapse: collapse;
+.el-table {
+  margin-top: 20px;
 }
 
-th, td {
-  border: 1px solid #ddd;
-  padding: 8px;
+.el-input {
+  width: 300px;
 }
 
-th {
-  background-color: #f2f2f2;
-  text-align: left;
-}
-
-button {
-  margin: 5px;
-  padding: 5px 10px;
+.el-button {
+  margin: 0 5px;
 }
 </style>
