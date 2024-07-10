@@ -56,7 +56,7 @@ public class StudentController {
     //删除
     @DeleteMapping("/{studentNo}")
     @ApiOperation("删除")
-    public Result delete(@PathVariable String studentNo){
+    public Result delete(@PathVariable Integer studentNo){
         return studentService.removeById(studentNo)?Result.suc():Result.fail();
     }
 

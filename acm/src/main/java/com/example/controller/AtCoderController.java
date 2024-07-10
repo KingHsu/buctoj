@@ -20,6 +20,13 @@ public class AtCoderController {
     @Autowired
     private AtCoderService atCoderService;
 
+    @GetMapping("/order")
+    @ApiOperation("根据比赛场次排序")
+    public Result getCount(@RequestParam int page, @RequestParam int size, @RequestParam(required = false, defaultValue = "asc") String orderBy) {
+        IPage<AtCoder> acCount = atCoderService.getCount(page, size, orderBy);
+        return Result.suc(acCount);
+    }
+
     // 分页查询
     @PostMapping("/listPage")
     @ApiOperation("分页查询")

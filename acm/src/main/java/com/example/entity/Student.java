@@ -8,7 +8,7 @@ import lombok.Data;
 @TableName("student")
 public class Student {
     @TableId
-    private String stuNo;
+    private Integer stuNo;
     private String stuName;
     private String stuClass;
     private String stuAcId;

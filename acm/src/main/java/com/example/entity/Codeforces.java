@@ -11,7 +11,7 @@ public class Codeforces {
     private String cfRank;
     private String cfOldRating;
     private String cfNewRating;
-    private String cfSumContest;
+    private Integer cfSumContest;
     private String cfDate;
-    private String cfNum;
+    private Integer cfNum;
 }

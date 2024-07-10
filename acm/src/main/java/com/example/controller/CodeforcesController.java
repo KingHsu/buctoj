@@ -6,15 +6,13 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.common.QueryPageParam;
 import com.example.common.Result;
+import com.example.entity.AtCoder;
 import com.example.entity.Codeforces;
 import com.example.service.CodeforcesService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -23,6 +21,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class CodeforcesController {
     @Autowired
     private CodeforcesService codeforcesService;
+
+    @GetMapping("/order")
+    @ApiOperation("根据比赛场次排序")
+    public Result getCount(@RequestParam int page, @RequestParam int size, @RequestParam(required = false, defaultValue = "asc") String orderBy) {
+        IPage<Codeforces> cfCount = codeforcesService.getCount(page, size, orderBy);
+        return Result.suc(cfCount);
+    }
 
     // 分页查询
     @PostMapping("/listPage")

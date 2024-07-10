@@ -16,8 +16,8 @@ public class AtCoder {
     @TableField("ac_newRating")
     private String acNewRating;
     private String acDiff;
-    private String acCount;
+    private Integer acCount;
     @TableField("ac_maxRating")
     private String acMaxRating;
-    private String acNum;
+    private Integer acNum;
 }
