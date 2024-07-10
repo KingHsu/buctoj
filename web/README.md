@@ -1,4 +1,4 @@
-# buctoj
+# buctoj-web
 
 ## Project setup
 ```

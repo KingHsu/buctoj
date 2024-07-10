@@ -1,22 +1,9 @@
 <template>
   <div id="app">
-    <div class="top">
-      <router-view></router-view>
-    </div>
+    <router-view/>
   </div>
-  
 </template>
 
-<script>
-export default {
-  name: 'App',
-  
-}
-</script>
+<style lang="less">
 
-<style scoped>
-  body {
-    margin: 0;
-    padding: 0;
-  }
 </style>
