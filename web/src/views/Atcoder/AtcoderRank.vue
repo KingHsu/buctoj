@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>AtCoder 账户排名</h1>
+
     <el-table
       :data="filteredRanks"
       style="width: 100%"
@@ -35,95 +36,11 @@
 export default {
   data () {
     return {
-      ranks: [
-        {
-          ac_num: 1,
-          ac_id: 'user1',
-          ac_date: '2024-01-01',
-          ac_contest: 'Contest 1',
-          ac_rank: '3000',
-          ac_performance: 'Good',
-          ac_newRating: '2546',
-          ac_diff: '+100',
-          ac_count: 50,
-          ac_maxRating: '2700'
-        },
-        {
-          ac_num: 1,
-          ac_id: 'user1',
-          ac_date: '2024-01-01',
-          ac_contest: 'Contest 1',
-          ac_rank: '3000',
-          ac_performance: 'Good',
-          ac_newRating: '2546',
-          ac_diff: '+100',
-          ac_count: 50,
-          ac_maxRating: '2700'
-        },
-        {
-          ac_num: 2,
-          ac_id: 'user2',
-          ac_date: '2024-02-01',
-          ac_contest: 'Contest 2',
-          ac_rank: '2000',
-          ac_performance: 'Average',
-          ac_newRating: '2456',
-          ac_diff: '-50',
-          ac_count: 45,
-          ac_maxRating: '2600'
-        },
-        {
-          ac_num: 1,
-          ac_id: 'user1',
-          ac_date: '2024-01-01',
-          ac_contest: 'Contest 1',
-          ac_rank: '3000',
-          ac_performance: 'Good',
-          ac_newRating: '2546',
-          ac_diff: '+100',
-          ac_count: 50,
-          ac_maxRating: '2700'
-        },
-        {
-          ac_num: 2,
-          ac_id: 'user2',
-          ac_date: '2024-02-01',
-          ac_contest: 'Contest 2',
-          ac_rank: '2000',
-          ac_performance: 'Average',
-          ac_newRating: '2456',
-          ac_diff: '-50',
-          ac_count: 45,
-          ac_maxRating: '2600'
-        },
-        {
-          ac_num: 2,
-          ac_id: 'user2',
-          ac_date: '2024-02-01',
-          ac_contest: 'Contest 2',
-          ac_rank: '2000',
-          ac_performance: 'Average',
-          ac_newRating: '2456',
-          ac_diff: '-50',
-          ac_count: 45,
-          ac_maxRating: '2600'
-        },
-        {
-          ac_num: 3,
-          ac_id: 'user3',
-          ac_date: '2024-03-01',
-          ac_contest: 'Contest 3',
-          ac_rank: '4000',
-          ac_performance: 'Excellent',
-          ac_newRating: '1975',
-          ac_diff: '+200',
-          ac_count: 64,
-          ac_maxRating: '2900'
-        }
-      ],
-      searchQuery: '',
-      pageNum: 1,
+      ranks: [],
       pageSize: 10,
+      pageNum: 1,
+      total: 0,
+      searchQuery: '',
       sort: {
         prop: 'ac_count',
         order: 'descending'
@@ -161,12 +78,12 @@ export default {
         pageSize: this.pageSize,
         pageNum: this.pageNum,
         param: {
-          searchQuery: this.searchQuery
+          acNum: this.searchQuery
         }
       }).then(res => res.data).then(res => {
         if (res.code === 200) {
           this.ranks = res.data
-          this.filterAndSortRanks()
+          this.total = res.total
         } else {
           alert('获取数据失败')
         }
