@@ -40,33 +40,7 @@ export default {
       pageNum: 1,
       total: 0,
       searchQuery: '',
-      contests: [
-        {
-          acContestId: '1499',
-          acContest: 'TOYOTA SYSTEMS Programming Contest 2023(AtCoder Beginner Contest 330)',
-          acType: 'abc',
-          acDate: '2023/11/25 20:00:00',
-          acTime: '01:40:00',
-          acNum: '2'
-        },
-        {
-          acContestId: '1500',
-          acContest: 'atcoder SYSTEMS Programming Contest 2023(AtCoder Beginner Contest 331)',
-          acType: 'abc',
-          acDate: '2023/11/26 20:00:00',
-          acTime: '01:40:00',
-          acNum: '3'
-        },
-        {
-          acContestId: '1501',
-          acContest: 'TOA SYSTEMS Programming Contest 2023(AtCoder Beginner Contest 332)',
-          acType: 'abc',
-          acDate: '2023/11/27 20:00:00',
-          acTime: '01:40:00',
-          acNum: '4'
-        }
-        // 继续添加更多模拟数据...
-      ]
+      contests: []
     }
   },
   computed: {

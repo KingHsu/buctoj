@@ -34,33 +34,7 @@
 export default {
   data () {
     return {
-      contests: [
-        {
-          cfContestId: '1499',
-          cfContest: 'Codeforces Round #680',
-          cfType: 'Div. 3',
-          cfDate: '2023/11/25 20:00:00',
-          cfTime: '01:40:00',
-          cfNum: '2000'
-        },
-        {
-          cfContestId: '1500',
-          cfContest: 'Codeforces Round #681',
-          cfType: 'Div. 2',
-          cfDate: '2023/11/26 20:00:00',
-          cfTime: '02:00:00',
-          cfNum: '2500'
-        },
-        {
-          cfContestId: '1501',
-          cfContest: 'Codeforces Round #682',
-          cfType: 'Div. 1',
-          cfDate: '2023/11/27 20:00:00',
-          cfTime: '02:30:00',
-          cfNum: '1500'
-        }
-        // 继续添加更多模拟数据...
-      ],
+      contests: [],
       pageNum: 1,
       pageSize: 10,
       total: 0,
@@ -85,9 +59,10 @@ export default {
         pageSize: this.pageSize,
         pageNum: this.pageNum,
         param: {
-          cfContest: this.cfContest
+          cfContest: this.searchQuery
         }
       }).then(res => res.data).then(res => {
+        console.log(res.data)
         if (res.code === 200) {
           this.tableData = res.data
           this.total = res.total

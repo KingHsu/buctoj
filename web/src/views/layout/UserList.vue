@@ -3,14 +3,6 @@
     <div style="margin-bottom: 5px;">
         <el-input v-model="stuNum" placeholder="请输入学号" suffix-icon="el-icon-search" style="width: 200px;"
                   @keyup.enter.native="loadPost"></el-input>
-        <el-select v-model="sex" filterable placeholder="请选择性别" style="margin-left: 5px;">
-            <el-option
-                    v-for="item in sexs"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value">
-            </el-option>
-        </el-select>
         <el-button type="primary" style="margin-left: 5px;" @click="loadPost">查询</el-button>
         <el-button type="success" @click="resetParam">重置</el-button>
 
@@ -51,7 +43,7 @@
             :total="total">
     </el-pagination>
 
-    <el-dialog
+    <!-- <el-dialog
             title="提示"
             :visible.sync="centerDialogVisible"
             width="30%"
@@ -94,7 +86,7 @@
 <el-button @click="centerDialogVisible = false">取 消</el-button>
 <el-button type="primary" @click="save">确 定</el-button>
 </span>
-    </el-dialog>
+    </el-dialog> -->
 </div>
 </template>
 
@@ -129,15 +121,6 @@ export default {
       pageNum: 1,
       total: 0,
       stuNum: '',
-      sexs: [
-        {
-          value: '1',
-          label: '男'
-        }, {
-          value: '0',
-          label: '女'
-        }
-      ],
       centerDialogVisible: false,
       form: {
         stuNo: '',
@@ -175,99 +158,99 @@ export default {
     resetForm () {
       this.$refs.form.resetFields()
     },
-    del (id) {
-      console.log(id)
+    // del (id) {
+    //   console.log(id)
 
-      this.$axios.get(this.$httpUrl + '/student/del?id=' + id).then(res => res.data).then(res => {
-        console.log(res)
-        if (res.code === 200) {
-          this.$message({
-            message: '操作成功！',
-            type: 'success'
-          })
-          this.loadPost()
-        } else {
-          this.$message({
-            message: '操作失败！',
-            type: 'error'
-          })
-        }
-      })
-    },
-    mod (row) {
-      console.log(row)
+    //   this.$axios.get(this.$httpUrl + '/student/' + id).then(res => res.data).then(res => {
+    //     console.log(res)
+    //     if (res.code === 200) {
+    //       this.$message({
+    //         message: '操作成功！',
+    //         type: 'success'
+    //       })
+    //       this.loadPost()
+    //     } else {
+    //       this.$message({
+    //         message: '操作失败！',
+    //         type: 'error'
+    //       })
+    //     }
+    //   })
+    // },
+    // mod (row) {
+    //   console.log(row)
 
-      this.centerDialogVisible = true
-      this.$nextTick(() => {
-        // 赋值到表单
-        this.form.id = row.id
-        this.form.no = row.no
-        this.form.name = row.name
-        this.form.password = ''
-        this.form.age = row.age + ''
-        this.form.sex = row.sex + ''
-        this.form.phone = row.phone
-        this.form.roleId = row.roleId
-      })
-    },
-    add () {
-      this.centerDialogVisible = true
-      this.$nextTick(() => {
-        this.resetForm()
-      })
-    },
-    doSave () {
-      this.$axios.post(this.$httpUrl + '/student/save', this.form).then(res => res.data).then(res => {
-        console.log(res)
-        if (res.code === 200) {
-          this.$message({
-            message: '操作成功！',
-            type: 'success'
-          })
-          this.centerDialogVisible = false
-          this.loadPost()
-          this.resetForm()
-        } else {
-          this.$message({
-            message: '操作失败！',
-            type: 'error'
-          })
-        }
-      })
-    },
-    doMod () {
-      this.$axios.post(this.$httpUrl + '/student/update', this.form).then(res => res.data).then(res => {
-        console.log(res)
-        if (res.code === 200) {
-          this.$message({
-            message: '操作成功！',
-            type: 'success'
-          })
-          this.centerDialogVisible = false
-          this.loadPost()
-          this.resetForm()
-        } else {
-          this.$message({
-            message: '操作失败！',
-            type: 'error'
-          })
-        }
-      })
-    },
-    save () {
-      this.$refs.form.validate((valid) => {
-        if (valid) {
-          if (this.form.id) {
-            this.doMod()
-          } else {
-            this.doSave()
-          }
-        } else {
-          console.log('error submit!!')
-          return false
-        }
-      })
-    },
+    //   this.centerDialogVisible = true
+    //   this.$nextTick(() => {
+    //     // 赋值到表单
+    //     this.form.id = row.id
+    //     this.form.no = row.no
+    //     this.form.name = row.name
+    //     this.form.password = ''
+    //     this.form.age = row.age + ''
+    //     this.form.sex = row.sex + ''
+    //     this.form.phone = row.phone
+    //     this.form.roleId = row.roleId
+    //   })
+    // },
+    // add () {
+    //   this.centerDialogVisible = true
+    //   this.$nextTick(() => {
+    //     this.resetForm()
+    //   })
+    // },
+    // doSave () {
+    //   this.$axios.post(this.$httpUrl + '/student/save', this.form).then(res => res.data).then(res => {
+    //     console.log(res)
+    //     if (res.code === 200) {
+    //       this.$message({
+    //         message: '操作成功！',
+    //         type: 'success'
+    //       })
+    //       this.centerDialogVisible = false
+    //       this.loadPost()
+    //       this.resetForm()
+    //     } else {
+    //       this.$message({
+    //         message: '操作失败！',
+    //         type: 'error'
+    //       })
+    //     }
+    //   })
+    // },
+    // doMod () {
+    //   this.$axios.post(this.$httpUrl + '/student/update', this.form).then(res => res.data).then(res => {
+    //     console.log(res)
+    //     if (res.code === 200) {
+    //       this.$message({
+    //         message: '操作成功！',
+    //         type: 'success'
+    //       })
+    //       this.centerDialogVisible = false
+    //       this.loadPost()
+    //       this.resetForm()
+    //     } else {
+    //       this.$message({
+    //         message: '操作失败！',
+    //         type: 'error'
+    //       })
+    //     }
+    //   })
+    // },
+    // save () {
+    //   this.$refs.form.validate((valid) => {
+    //     if (valid) {
+    //       if (this.form.id) {
+    //         this.doMod()
+    //       } else {
+    //         this.doSave()
+    //       }
+    //     } else {
+    //       console.log('error submit!!')
+    //       return false
+    //     }
+    //   })
+    // },
     handleSizeChange (val) {
       console.log(`每页 ${val} 条`)
       this.pageNum = 1
@@ -285,8 +268,7 @@ export default {
       })
     },
     resetParam () {
-      this.name = ''
-      this.sex = ''
+      this.stuNum = ''
     },
     selectCurrentChange (val) {
       // this.currentRow = val;

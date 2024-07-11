@@ -6,11 +6,11 @@
               <el-form :model="loginForm" label-width="100px"
                        :rules="rules" ref="loginForm">
                   <el-form-item label="账号" prop="no">
-                      <el-input style="width: 200px" type="text" v-model="loginForm.no"
+                      <el-input style="width: 200px" type="text" v-model="loginForm.stuUsername"
                                 autocomplete="off" size="small"></el-input>
                   </el-form-item>
                   <el-form-item label="密码" prop="password">
-                      <el-input style="width: 200px" type="password" v-model="loginForm.password"
+                      <el-input style="width: 200px" type="password" v-model="loginForm.stuPassword"
                                 show-password autocomplete="off" size="small" @keyup.enter.native="confirm"></el-input>
                   </el-form-item>
                   <el-form-item>
@@ -29,14 +29,14 @@ export default {
     return {
       confirm_disabled: false,
       loginForm: {
-        no: '',
-        password: ''
+        stuUsername: '',
+        stuPassword: ''
       },
       rules: {
-        no: [
+        stuUsername: [
           { required: true, message: '请输入账号', trigger: 'blur' }
         ],
-        password: [
+        stuPassword: [
           { required: true, message: '请输密码', trigger: 'blur' }
         ]
       }
@@ -49,16 +49,11 @@ export default {
       this.$refs.loginForm.validate((valid) => {
         if (valid) { // valid成功为true，失败为false
           // 去后台验证用户名密码
-          this.$axios.post(this.$httpUrl + 'student/login', this.loginForm).then(res => res.data).then(res => {
+          this.$axios.post(this.$httpUrl + '/student/login', this.loginForm).then(res => res.data).then(res => {
             console.log(res)
             if (res.code === 200) {
-              // 存储
-              sessionStorage.setItem('CurUser', JSON.stringify(res.data.user))
-
-              console.log(res.data.menu)
-              this.$store.commit('setMenu', res.data.menu)
               // 跳转到主页
-              this.$router.replace('/OjIndex')
+              this.$router.replace('/OjHome')
             } else {
               this.confirm_disabled = false
               alert('校验失败，用户名或密码错误！')

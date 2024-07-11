@@ -1,32 +1,62 @@
 <template>
   <div>
-    <h1>AtCoder 账户排名</h1>
-
+    <h1>Atcoder 账户排名</h1>
     <el-table
-      :data="filteredRanks"
+      :data="ranks"
       style="width: 100%"
-      :default-sort="{ prop: 'ac_count', order: 'descending' }"
       @sort-change="handleSortChange">
-      <el-table-column prop="ac_num" label="序号" width="100" sortable="custom"></el-table-column>
-      <el-table-column prop="ac_id" label="用户名" width="200" sortable="custom"></el-table-column>
-      <el-table-column prop="ac_date" label="日期" width="150"></el-table-column>
-      <el-table-column prop="ac_contest" label="比赛名称" width="200"></el-table-column>
-      <el-table-column prop="ac_rank" label="排名" width="100" sortable="custom"></el-table-column>
-      <el-table-column prop="ac_performance" label="表现" width="150"></el-table-column>
-      <el-table-column prop="ac_newRating" label="新积分" width="150"></el-table-column>
-      <el-table-column prop="ac_diff" label="积分变化" width="150"></el-table-column>
-      <el-table-column prop="ac_count" label="比赛次数" width="150" sortable="custom"></el-table-column>
-      <el-table-column prop="ac_maxRating" label="最高积分" width="150"></el-table-column>
+      <el-table-column
+        prop="acId"
+        label="用户名"
+        width="200">
+      </el-table-column>
+      <el-table-column
+        prop="acCount"
+        label="参与比赛总数"
+        width="200"
+        sortable="custom">
+      </el-table-column>
+      <el-table-column
+        prop="acContest"
+        label="比赛名称"
+        width="300">
+      </el-table-column>
+      <el-table-column
+        prop="acRank"
+        label="排名"
+        width="200">
+      </el-table-column>
+      <el-table-column
+      prop="acPerformance"
+      label="表现"
+      width="200">
+      </el-table-column>
+      <el-table-column
+        prop="acNewRating"
+        label="新积分"
+        width="200">
+      </el-table-column>
+      <el-table-column
+        prop="acDiff"
+        label="积分变化"
+        width="200">
+      </el-table-column>
+      <el-table-column
+        prop="acMaxRating"
+        label="最高积分"
+        width="200">
+    </el-table-column>
     </el-table>
+
     <div style="text-align: center; margin-top: 20px;">
       <el-pagination
-        @size-change="handleSizeChange"
         @current-change="handlePageChange"
+        @size-change="handleSizeChange"
         :current-page="pageNum"
-        :page-sizes="[5, 10, 20, 30]"
         :page-size="pageSize"
+        :page-sizes="[5, 10, 20, 30]"
         layout="total, sizes, prev, pager, next, jumper"
-        :total="totalFilteredRanks">
+        :total="total">
       </el-pagination>
     </div>
   </div>
@@ -37,65 +67,36 @@ export default {
   data () {
     return {
       ranks: [],
-      pageSize: 10,
       pageNum: 1,
+      pageSize: 10,
+      pageSizes: [5, 10, 20, 30],
       total: 0,
-      searchQuery: '',
-      sort: {
-        prop: 'ac_count',
-        order: 'descending'
-      }
-    }
-  },
-  computed: {
-    totalFilteredRanks () {
-      return this.ranks.filter(rank =>
-        rank.ac_id.toLowerCase().includes(this.searchQuery.toLowerCase())
-      ).length
-    },
-    filteredRanks () {
-      const filtered = this.ranks.filter(rank =>
-        rank.ac_id.toLowerCase().includes(this.searchQuery.toLowerCase())
-      )
-
-      if (this.sort.prop && this.sort.order) {
-        const order = this.sort.order === 'ascending' ? 1 : -1
-        filtered.sort((a, b) => {
-          if (a[this.sort.prop] < b[this.sort.prop]) return -1 * order
-          if (a[this.sort.prop] > b[this.sort.prop]) return 1 * order
-          return 0
-        })
-      }
-
-      const start = (this.pageNum - 1) * this.pageSize
-      const end = this.pageNum * this.pageSize
-      return filtered.slice(start, end)
+      order: 'dsc'
     }
   },
   methods: {
     fetchRanks () {
-      this.$axios.post(this.$httpUrl + '/atCoder/listPage', {
-        pageSize: this.pageSize,
-        pageNum: this.pageNum,
-        param: {
-          acNum: this.searchQuery
-        }
+      this.$axios.get(this.$httpUrl + '/atCoder/order', {
+        params: {
+          page: this.pageNum,
+          size: this.pageSize,
+          orderBy: this.order
+        },
+        Headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
       }).then(res => res.data).then(res => {
+        console.log(res.data)
         if (res.code === 200) {
-          this.ranks = res.data
-          this.total = res.total
+          this.ranks = res.data.records
+          this.total = res.data.total
         } else {
           alert('获取数据失败')
         }
       })
     },
-    resetParam () {
-      this.searchQuery = ''
+    handleSortChange () {
+      console.log(this.order)
+      if (this.order === 'asc') { this.order = 'dsc' } else this.order = 'asc'
       this.fetchRanks()
-    },
-    handleSortChange ({ prop, order }) {
-      this.sort.prop = prop
-      this.sort.order = order
     },
     handlePageChange (page) {
       this.pageNum = page
@@ -103,11 +104,17 @@ export default {
     },
     handleSizeChange (size) {
       this.pageSize = size
-      this.pageNum = 1
+      this.pageNum = 1 // 切换每页条数时重置到第一页
+      this.fetchRanks()
+    },
+    sortChange () {
+      if (this.order === 'asc') this.order = 'dsc'
+      else this.order = 'asc'
+      console.log(this.order)
       this.fetchRanks()
     }
   },
-  beforeMount () {
+  created () {
     this.fetchRanks()
   }
 }
