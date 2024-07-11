@@ -1,16 +1,10 @@
 <template>
   <div>
     <h1>AtCoder 账户排名</h1>
-    <el-input
-      v-model="searchQuery"
-      placeholder="输入账户名称进行搜索"
-      @input="fetchRanks"
-      style="margin-bottom: 20px;">
-    </el-input>
     <el-table
       :data="filteredRanks"
       style="width: 100%"
-      :default-sort="{prop: 'ac_count', order: 'descending'}"
+      :default-sort="{ prop: 'ac_count', order: 'descending' }"
       @sort-change="handleSortChange">
       <el-table-column prop="ac_num" label="序号" width="100" sortable="custom"></el-table-column>
       <el-table-column prop="ac_id" label="用户名" width="200" sortable="custom"></el-table-column>
@@ -25,10 +19,12 @@
     </el-table>
     <div style="text-align: center; margin-top: 20px;">
       <el-pagination
+        @size-change="handleSizeChange"
         @current-change="handlePageChange"
         :current-page="pageNum"
+        :page-sizes="[5, 10, 20, 30]"
         :page-size="pageSize"
-        layout="prev, pager, next"
+        layout="total, sizes, prev, pager, next, jumper"
         :total="totalFilteredRanks">
       </el-pagination>
     </div>
@@ -76,29 +72,59 @@ export default {
           ac_count: 64,
           ac_maxRating: '2900'
         }
-        // 继续添加更多模拟数据...
       ],
       searchQuery: '',
       pageNum: 1,
       pageSize: 10,
+      totalFilteredRanks: 0,
+      filteredRanks: [],
       sort: {
         prop: 'ac_count',
         order: 'descending'
       }
     }
   },
-  computed: {
-    totalFilteredRanks () {
-      return this.ranks.filter(rank =>
-        rank.ac_id.toLowerCase().includes(this.searchQuery.toLowerCase())
-      ).length
+  methods: {
+    fetchRanks () {
+      this.$axios.post(this.$httpUrl + '/student/listPage', {
+        pageSize: this.pageSize,
+        pageNum: this.pageNum,
+        param: {
+          searchQuery: this.searchQuery
+        }
+      }).then(res => res.data).then(res => {
+        if (res.code === 200) {
+          this.ranks = res.data
+          this.totalFilteredRanks = res.total
+          this.filterAndSortRanks()
+        } else {
+          alert('获取数据失败')
+        }
+      })
     },
-    filteredRanks () {
+    resetParam () {
+      this.searchQuery = ''
+      this.fetchRanks()
+    },
+    handleSortChange ({ prop, order }) {
+      this.sort.prop = prop
+      this.sort.order = order
+      this.filterAndSortRanks()
+    },
+    handlePageChange (page) {
+      this.pageNum = page
+      this.fetchRanks()
+    },
+    handleSizeChange (size) {
+      this.pageSize = size
+      this.pageNum = 1
+      this.fetchRanks()
+    },
+    filterAndSortRanks () {
       const filtered = this.ranks.filter(rank =>
         rank.ac_id.toLowerCase().includes(this.searchQuery.toLowerCase())
       )
 
-      // 排序
       if (this.sort.prop && this.sort.order) {
         const order = this.sort.order === 'ascending' ? 1 : -1
         filtered.sort((a, b) => {
@@ -108,24 +134,13 @@ export default {
         })
       }
 
-      // 分页
       const start = (this.pageNum - 1) * this.pageSize
       const end = this.pageNum * this.pageSize
-      return filtered.slice(start, end)
+      this.filteredRanks = filtered.slice(start, end)
     }
   },
-  methods: {
-    fetchRanks () {
-      // 模拟数据，不需要实际请求
-      console.log('Fetching ranks...')
-    },
-    handleSortChange ({ prop, order }) {
-      this.sort.prop = prop
-      this.sort.order = order
-    },
-    handlePageChange (page) {
-      this.pageNum = page
-    }
+  beforeMount () {
+    this.fetchRanks()
   }
 }
 </script>

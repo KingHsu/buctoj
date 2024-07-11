@@ -1,12 +1,7 @@
 <template>
   <div>
     <h1>Codeforces 账户排名</h1>
-    <el-input
-      v-model="searchQuery"
-      placeholder="输入账户名称进行搜索"
-      @input="fetchRanks"
-      style="margin-bottom: 20px;">
-    </el-input>
+
     <el-table
       :data="filteredRanks"
       style="width: 100%"
@@ -25,9 +20,11 @@
     <div style="text-align: center; margin-top: 20px;">
       <el-pagination
         @current-change="handlePageChange"
+        @size-change="handleSizeChange"
         :current-page="pageNum"
         :page-size="pageSize"
-        layout="prev, pager, next"
+        :page-sizes="[5, 10, 20, 30]"
+        layout="total, sizes, prev, pager, next, jumper"
         :total="totalFilteredRanks">
       </el-pagination>
     </div>
@@ -39,6 +36,50 @@ export default {
   data () {
     return {
       ranks: [
+        {
+          cf_num: 1,
+          cf_id: 'user1',
+          cf_contest: 'Contest 1',
+          cf_contest_id: '12345',
+          cf_rank: '3000',
+          cf_old_rating: '2500',
+          cf_new_rating: '2600',
+          cf_sum_contest: 50,
+          cf_date: '2024-01-01'
+        },
+        {
+          cf_num: 2,
+          cf_id: 'user2',
+          cf_contest: 'Contest 2',
+          cf_contest_id: '67890',
+          cf_rank: '2000',
+          cf_old_rating: '2400',
+          cf_new_rating: '2450',
+          cf_sum_contest: 45,
+          cf_date: '2024-02-01'
+        },
+        {
+          cf_num: 1,
+          cf_id: 'user1',
+          cf_contest: 'Contest 1',
+          cf_contest_id: '12345',
+          cf_rank: '3000',
+          cf_old_rating: '2500',
+          cf_new_rating: '2600',
+          cf_sum_contest: 50,
+          cf_date: '2024-01-01'
+        },
+        {
+          cf_num: 2,
+          cf_id: 'user2',
+          cf_contest: 'Contest 2',
+          cf_contest_id: '67890',
+          cf_rank: '2000',
+          cf_old_rating: '2400',
+          cf_new_rating: '2450',
+          cf_sum_contest: 45,
+          cf_date: '2024-02-01'
+        },
         {
           cf_num: 1,
           cf_id: 'user1',
@@ -77,6 +118,7 @@ export default {
       searchQuery: '',
       pageNum: 1,
       pageSize: 10,
+      pageSizes: [5, 10, 20, 30],
       sort: {
         prop: 'cf_sum_contest',
         order: 'descending'
@@ -121,6 +163,10 @@ export default {
     },
     handlePageChange (page) {
       this.pageNum = page
+    },
+    handleSizeChange (size) {
+      this.pageSize = size
+      this.pageNum = 1 // 切换每页条数时重置到第一页
     }
   }
 }

@@ -1,13 +1,16 @@
 <template>
   <div>
     <h1>Codeforces 比赛列表</h1>
-    <el-input
-      v-model="searchQuery"
-      placeholder="输入比赛名称进行搜索"
-      @input="fetchContests"
-      style="margin-bottom: 20px;">
-    </el-input>
-    <el-table :data="filteredContests" style="width: 100%">
+    <div style="margin-bottom: 5px;">
+      <el-input
+        v-model="searchQuery"
+        placeholder="输入比赛名称进行搜索"
+        style="width: 300px; margin-right: 10px;">
+      </el-input>
+      <el-button type="primary" @click="fetchContests">查询</el-button>
+      <el-button type="success" @click="resetParam">重置</el-button>
+    </div>
+    <el-table :data="tableData" style="width: 100%">
       <el-table-column prop="cfContestId" label="比赛ID" width="100"></el-table-column>
       <el-table-column prop="cfContest" label="比赛名称"></el-table-column>
       <el-table-column prop="cfType" label="类型" width="100"></el-table-column>
@@ -15,16 +18,20 @@
       <el-table-column prop="cfTime" label="时间" width="100"></el-table-column>
       <el-table-column prop="cfNum" label="参与人数" width="100"></el-table-column>
     </el-table>
-    <div style="text-align: center; margin-top: 20px;">
-      <el-button @click="prevPage" :disabled="pageNum === 1">上一页</el-button>
-      <el-button @click="nextPage" :disabled="filteredContests.length < pageSize">下一页</el-button>
-    </div>
+    <el-pagination
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page="pageNum"
+      :page-sizes="[5, 10, 20, 30]"
+      :page-size="pageSize"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="total">
+    </el-pagination>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'CodeforcesList',
   data () {
     return {
       contests: [
@@ -56,7 +63,9 @@ export default {
       ],
       pageNum: 1,
       pageSize: 10,
-      searchQuery: ''
+      total: 0,
+      searchQuery: '',
+      tableData: []
     }
   },
   computed: {
@@ -72,19 +81,37 @@ export default {
   },
   methods: {
     fetchContests () {
-      // 模拟数据，不需要实际请求
-      console.log('Fetching contests...')
+      this.$axios.post(this.$httpUrl + '/cfContest/listPage', {
+        pageSize: this.pageSize,
+        pageNum: this.pageNum,
+        param: {
+          cfContest: this.cfContest
+        }
+      }).then(res => res.data).then(res => {
+        if (res.code === 200) {
+          this.tableData = res.data
+          this.total = res.total
+        } else {
+          alert('获取数据失败')
+        }
+      })
     },
-    nextPage () {
-      if ((this.pageNum * this.pageSize) < this.contests.length) {
-        this.pageNum++
-      }
+    resetParam () {
+      this.searchQuery = ''
+      this.fetchContests()
     },
-    prevPage () {
-      if (this.pageNum > 1) {
-        this.pageNum--
-      }
+    handleSizeChange (val) {
+      this.pageSize = val
+      this.pageNum = 1
+      this.fetchContests()
+    },
+    handleCurrentChange (val) {
+      this.pageNum = val
+      this.fetchContests()
     }
+  },
+  beforeMount () {
+    this.fetchContests()
   }
 }
 </script>

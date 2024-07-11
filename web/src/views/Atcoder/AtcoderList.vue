@@ -1,13 +1,17 @@
 <template>
   <div>
     <h1>Atcoder 比赛列表</h1>
-    <el-input
-      v-model="searchQuery"
-      placeholder="输入比赛名称进行搜索"
-      @input="fetchContests"
-      style="margin-bottom: 20px;">
-    </el-input>
-    <el-table :data="filteredContests" style="width: 100%">
+    <div style="margin-bottom: 20px;">
+      <el-input
+        v-model="searchQuery"
+        placeholder="输入比赛名称进行搜索"
+        style="width: 300px;"
+        @keyup.enter.native="loadPost">
+      </el-input>
+      <el-button type="primary" style="margin-left: 5px;" @click="loadPost">查询</el-button>
+      <el-button type="success" @click="resetParam">重置</el-button>
+    </div>
+    <el-table :data="tableData" style="width: 100%">
       <el-table-column prop="acContestId" label="比赛ID" width="100"></el-table-column>
       <el-table-column prop="acContest" label="比赛名称"></el-table-column>
       <el-table-column prop="acType" label="类型" width="100"></el-table-column>
@@ -15,18 +19,27 @@
       <el-table-column prop="acTime" label="时间" width="100"></el-table-column>
       <el-table-column prop="acNum" label="参与人数" width="100"></el-table-column>
     </el-table>
-    <div style="text-align: center; margin-top: 20px;">
-      <el-button @click="prevPage" :disabled="pageNum === 1">上一页</el-button>
-      <el-button @click="nextPage" :disabled="contests.length < pageSize">下一页</el-button>
-    </div>
+    <el-pagination
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page="pageNum"
+      :page-sizes="[5, 10, 20, 30]"
+      :page-size="pageSize"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="total">
+    </el-pagination>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'AtcoderList',
   data () {
     return {
+      tableData: [],
+      pageSize: 10,
+      pageNum: 1,
+      total: 0,
+      searchQuery: '',
       contests: [
         {
           acContestId: '1499',
@@ -53,10 +66,7 @@ export default {
           acNum: '4'
         }
         // 继续添加更多模拟数据...
-      ],
-      pageNum: 1,
-      pageSize: 10,
-      searchQuery: ''
+      ]
     }
   },
   computed: {
@@ -84,7 +94,39 @@ export default {
       if (this.pageNum > 1) {
         this.pageNum--
       }
+    },
+    loadPost () {
+      this.$axios.post(this.$httpUrl + '/acContest/listPage', {
+        pageSize: this.pageSize,
+        pageNum: this.pageNum,
+        param: {
+          acContest: this.acContest
+        }
+      }).then(res => res.data).then(res => {
+        if (res.code === 200) {
+          this.tableData = res.data
+          this.total = res.total
+        } else {
+          alert('获取数据失败')
+        }
+      })
+    },
+    resetParam () {
+      this.searchQuery = ''
+      this.loadPost()
+    },
+    handleSizeChange (val) {
+      this.pageNum = 1
+      this.pageSize = val
+      this.loadPost()
+    },
+    handleCurrentChange (val) {
+      this.pageNum = val
+      this.loadPost()
     }
+  },
+  beforeMount () {
+    this.loadPost()
   }
 }
 </script>
