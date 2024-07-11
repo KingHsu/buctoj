@@ -49,6 +49,54 @@ export default {
           ac_maxRating: '2700'
         },
         {
+          ac_num: 1,
+          ac_id: 'user1',
+          ac_date: '2024-01-01',
+          ac_contest: 'Contest 1',
+          ac_rank: '3000',
+          ac_performance: 'Good',
+          ac_newRating: '2546',
+          ac_diff: '+100',
+          ac_count: 50,
+          ac_maxRating: '2700'
+        },
+        {
+          ac_num: 2,
+          ac_id: 'user2',
+          ac_date: '2024-02-01',
+          ac_contest: 'Contest 2',
+          ac_rank: '2000',
+          ac_performance: 'Average',
+          ac_newRating: '2456',
+          ac_diff: '-50',
+          ac_count: 45,
+          ac_maxRating: '2600'
+        },
+        {
+          ac_num: 1,
+          ac_id: 'user1',
+          ac_date: '2024-01-01',
+          ac_contest: 'Contest 1',
+          ac_rank: '3000',
+          ac_performance: 'Good',
+          ac_newRating: '2546',
+          ac_diff: '+100',
+          ac_count: 50,
+          ac_maxRating: '2700'
+        },
+        {
+          ac_num: 2,
+          ac_id: 'user2',
+          ac_date: '2024-02-01',
+          ac_contest: 'Contest 2',
+          ac_rank: '2000',
+          ac_performance: 'Average',
+          ac_newRating: '2456',
+          ac_diff: '-50',
+          ac_count: 45,
+          ac_maxRating: '2600'
+        },
+        {
           ac_num: 2,
           ac_id: 'user2',
           ac_date: '2024-02-01',
@@ -76,51 +124,19 @@ export default {
       searchQuery: '',
       pageNum: 1,
       pageSize: 10,
-      totalFilteredRanks: 0,
-      filteredRanks: [],
       sort: {
         prop: 'ac_count',
         order: 'descending'
       }
     }
   },
-  methods: {
-    fetchRanks () {
-      this.$axios.post(this.$httpUrl + '/student/listPage', {
-        pageSize: this.pageSize,
-        pageNum: this.pageNum,
-        param: {
-          searchQuery: this.searchQuery
-        }
-      }).then(res => res.data).then(res => {
-        if (res.code === 200) {
-          this.ranks = res.data
-          this.totalFilteredRanks = res.total
-          this.filterAndSortRanks()
-        } else {
-          alert('获取数据失败')
-        }
-      })
+  computed: {
+    totalFilteredRanks () {
+      return this.ranks.filter(rank =>
+        rank.ac_id.toLowerCase().includes(this.searchQuery.toLowerCase())
+      ).length
     },
-    resetParam () {
-      this.searchQuery = ''
-      this.fetchRanks()
-    },
-    handleSortChange ({ prop, order }) {
-      this.sort.prop = prop
-      this.sort.order = order
-      this.filterAndSortRanks()
-    },
-    handlePageChange (page) {
-      this.pageNum = page
-      this.fetchRanks()
-    },
-    handleSizeChange (size) {
-      this.pageSize = size
-      this.pageNum = 1
-      this.fetchRanks()
-    },
-    filterAndSortRanks () {
+    filteredRanks () {
       const filtered = this.ranks.filter(rank =>
         rank.ac_id.toLowerCase().includes(this.searchQuery.toLowerCase())
       )
@@ -136,7 +152,42 @@ export default {
 
       const start = (this.pageNum - 1) * this.pageSize
       const end = this.pageNum * this.pageSize
-      this.filteredRanks = filtered.slice(start, end)
+      return filtered.slice(start, end)
+    }
+  },
+  methods: {
+    fetchRanks () {
+      this.$axios.post(this.$httpUrl + '/atCoder/listPage', {
+        pageSize: this.pageSize,
+        pageNum: this.pageNum,
+        param: {
+          searchQuery: this.searchQuery
+        }
+      }).then(res => res.data).then(res => {
+        if (res.code === 200) {
+          this.ranks = res.data
+          this.filterAndSortRanks()
+        } else {
+          alert('获取数据失败')
+        }
+      })
+    },
+    resetParam () {
+      this.searchQuery = ''
+      this.fetchRanks()
+    },
+    handleSortChange ({ prop, order }) {
+      this.sort.prop = prop
+      this.sort.order = order
+    },
+    handlePageChange (page) {
+      this.pageNum = page
+      this.fetchRanks()
+    },
+    handleSizeChange (size) {
+      this.pageSize = size
+      this.pageNum = 1
+      this.fetchRanks()
     }
   },
   beforeMount () {

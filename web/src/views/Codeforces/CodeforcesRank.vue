@@ -154,19 +154,39 @@ export default {
   },
   methods: {
     fetchRanks () {
-      // 模拟数据，不需要实际请求
-      console.log('Fetching ranks...')
+      this.$axios.post(this.$httpUrl + '/codeforces/listPage', {
+        pageSize: this.pageSize,
+        pageNum: this.pageNum,
+        param: {
+          searchQuery: this.searchQuery
+        }
+      }).then(res => res.data).then(res => {
+        if (res.code === 200) {
+          this.ranks = res.data
+          this.totalFilteredRanks = res.total
+          this.filterAndSortRanks()
+        } else {
+          alert('获取数据失败')
+        }
+      })
+    },
+    resetParam () {
+      this.searchQuery = ''
+      this.fetchRanks()
     },
     handleSortChange ({ prop, order }) {
       this.sort.prop = prop
       this.sort.order = order
+      this.filterAndSortRanks()
     },
     handlePageChange (page) {
       this.pageNum = page
+      this.fetchRanks()
     },
     handleSizeChange (size) {
       this.pageSize = size
       this.pageNum = 1 // 切换每页条数时重置到第一页
+      this.fetchRanks()
     }
   }
 }
