@@ -2,11 +2,7 @@
   <div>
     <h1>Codeforces 账户排名</h1>
 
-    <el-table
-      :data="filteredRanks"
-      style="width: 100%"
-      :default-sort="{prop: 'cf_sum_contest', order: 'descending'}"
-      @sort-change="handleSortChange">
+    <el-table :data="filteredRanks" style="width: 100%">
       <el-table-column prop="cf_num" label="序号" width="200" sortable="custom"></el-table-column>
       <el-table-column prop="cf_id" label="用户名" width="200" sortable="custom"></el-table-column>
       <el-table-column prop="cf_contest" label="比赛名称" width="300"></el-table-column>
@@ -17,17 +13,15 @@
       <el-table-column prop="cf_sum_contest" label="参与比赛总数" width="200" sortable="custom"></el-table-column>
       <el-table-column prop="cf_date" label="日期" width="200"></el-table-column>
     </el-table>
-    <div style="text-align: center; margin-top: 20px;">
-      <el-pagination
-        @current-change="handlePageChange"
-        @size-change="handleSizeChange"
-        :current-page="pageNum"
-        :page-size="pageSize"
-        :page-sizes="[5, 10, 20, 30]"
-        layout="total, sizes, prev, pager, next, jumper"
-        :total="totalFilteredRanks">
-      </el-pagination>
-    </div>
+    <el-pagination
+      @size-change="handleSizeChange"
+      @current-change="handlePageChange"
+      :current-page="pageNum"
+      :page-sizes="[5, 10, 20, 30]"
+      :page-size="pageSize"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="totalFilteredRanks">
+    </el-pagination>
   </div>
 </template>
 
@@ -35,90 +29,11 @@
 export default {
   data () {
     return {
-      ranks: [
-        {
-          cf_num: 1,
-          cf_id: 'user1',
-          cf_contest: 'Contest 1',
-          cf_contest_id: '12345',
-          cf_rank: '3000',
-          cf_old_rating: '2500',
-          cf_new_rating: '2600',
-          cf_sum_contest: 50,
-          cf_date: '2024-01-01'
-        },
-        {
-          cf_num: 2,
-          cf_id: 'user2',
-          cf_contest: 'Contest 2',
-          cf_contest_id: '67890',
-          cf_rank: '2000',
-          cf_old_rating: '2400',
-          cf_new_rating: '2450',
-          cf_sum_contest: 45,
-          cf_date: '2024-02-01'
-        },
-        {
-          cf_num: 1,
-          cf_id: 'user1',
-          cf_contest: 'Contest 1',
-          cf_contest_id: '12345',
-          cf_rank: '3000',
-          cf_old_rating: '2500',
-          cf_new_rating: '2600',
-          cf_sum_contest: 50,
-          cf_date: '2024-01-01'
-        },
-        {
-          cf_num: 2,
-          cf_id: 'user2',
-          cf_contest: 'Contest 2',
-          cf_contest_id: '67890',
-          cf_rank: '2000',
-          cf_old_rating: '2400',
-          cf_new_rating: '2450',
-          cf_sum_contest: 45,
-          cf_date: '2024-02-01'
-        },
-        {
-          cf_num: 1,
-          cf_id: 'user1',
-          cf_contest: 'Contest 1',
-          cf_contest_id: '12345',
-          cf_rank: '3000',
-          cf_old_rating: '2500',
-          cf_new_rating: '2600',
-          cf_sum_contest: 50,
-          cf_date: '2024-01-01'
-        },
-        {
-          cf_num: 2,
-          cf_id: 'user2',
-          cf_contest: 'Contest 2',
-          cf_contest_id: '67890',
-          cf_rank: '2000',
-          cf_old_rating: '2400',
-          cf_new_rating: '2450',
-          cf_sum_contest: 45,
-          cf_date: '2024-02-01'
-        },
-        {
-          cf_num: 3,
-          cf_id: 'user3',
-          cf_contest: 'Contest 3',
-          cf_contest_id: '11121',
-          cf_rank: '4000',
-          cf_old_rating: '1950',
-          cf_new_rating: '2050',
-          cf_sum_contest: 64,
-          cf_date: '2024-03-01'
-        }
-        // 继续添加更多模拟数据...
-      ],
+      ranks: [], // 数据源改为空，从后端获取
       searchQuery: '',
       pageNum: 1,
       pageSize: 10,
-      pageSizes: [5, 10, 20, 30],
+      totalFilteredRanks: 0,
       sort: {
         prop: 'cf_sum_contest',
         order: 'descending'
@@ -126,11 +41,6 @@ export default {
     }
   },
   computed: {
-    totalFilteredRanks () {
-      return this.ranks.filter(rank =>
-        rank.cf_id.toLowerCase().includes(this.searchQuery.toLowerCase())
-      ).length
-    },
     filteredRanks () {
       const filtered = this.ranks.filter(rank =>
         rank.cf_id.toLowerCase().includes(this.searchQuery.toLowerCase())
@@ -188,6 +98,9 @@ export default {
       this.pageNum = 1 // 切换每页条数时重置到第一页
       this.fetchRanks()
     }
+  },
+  beforeMount () {
+    this.fetchRanks()
   }
 }
 </script>
@@ -199,10 +112,6 @@ export default {
 
 .el-input {
   width: 300px;
-}
-
-.el-pagination {
-  margin-top: 20px;
 }
 
 .el-button {
