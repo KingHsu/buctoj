@@ -18,6 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/student")
 @Api(tags = "学生用户管理")
+@CrossOrigin
 public class StudentController {
     @Autowired
     private StudentService studentService;

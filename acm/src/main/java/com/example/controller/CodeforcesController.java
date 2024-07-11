@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/codeforces")
 @Api(tags = "codeforces用户排名")
+@CrossOrigin
 public class CodeforcesController {
     @Autowired
     private CodeforcesService codeforcesService;

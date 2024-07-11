@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/cfContest")
 @Api(tags = "codeforces比赛列表")
+@CrossOrigin
 public class CfContestController {
     @Autowired
     private CfContestService cfcontestService;

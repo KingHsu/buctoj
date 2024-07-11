@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/atCoder")
 @Api(tags = "atCoder用户排名")
+@CrossOrigin
 public class AtCoderController {
     @Autowired
     private AtCoderService atCoderService;

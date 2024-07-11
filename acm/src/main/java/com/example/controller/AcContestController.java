@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/acContest")
 @Api(tags = "AtCoder比赛列表")
+@CrossOrigin
 public class AcContestController {
     @Autowired
     private AcContestService accontestService;
