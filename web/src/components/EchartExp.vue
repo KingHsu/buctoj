@@ -1,110 +1,109 @@
 <template>
-    <div class="main">
-      <div ref="chart" style="width: 100%; height: 100%" ></div>
-    </div>
+  <el-container>
+
+    <el-main>
+      <div id="main" style="width: 100%; height: 600px;"></div>
+    </el-main>
+  </el-container>
 </template>
 
 <script>
 import * as echarts from 'echarts'
+
 export default {
+  name: 'EchartClassScore',
+  mounted () {
+    this.initChart()
+  },
   methods: {
-    InitCharts () {
-      this.myChart = echarts.init(this.$refs.chart)
+    initChart () {
+      const chartDom = document.getElementById('main')
+      const myChart = echarts.init(chartDom)
+
+      const labelOption = {
+        show: true,
+        position: 'insideBottom',
+        distance: 15,
+        align: 'left',
+        verticalAlign: 'middle',
+        rotate: 90,
+        formatter: '{c} 分',
+        fontSize: 16,
+        rich: {
+          name: {}
+        }
+      }
 
       const option = {
         title: {
-          show: true,
-          text: '近七天提交数'
+          text: '班级积分综合对比柱状图'
         },
         tooltip: {
           trigger: 'axis',
           axisPointer: {
-            // Use axis to trigger tooltip
-            type: 'shadow' // 'shadow' as default; can also be 'line' or 'shadow'
+            type: 'shadow'
           }
         },
-        legend: {},
-        grid: {
-          left: '3%',
-          right: '4%',
-          bottom: '3%',
-          containLabel: true
+        legend: {
+          data: ['ac积分总和', 'cf积分总和']
         },
-        xAxis: {
-          type: 'category',
-          data: ['7.4', '7.3', '7.2', '7.1', '6.30', '6.29', '6.28']
+        toolbox: {
+          show: true,
+          orient: 'vertical',
+          left: 'right',
+          top: 'center',
+          feature: {
+            mark: { show: true },
+            dataView: { show: true, readOnly: false },
+            magicType: { show: true, type: ['line', 'bar'] },
+            restore: { show: true },
+            saveAsImage: { show: true }
+          }
         },
-        yAxis: {
-          type: 'value'
-
-        },
+        xAxis: [
+          {
+            type: 'category',
+            axisTick: { show: false },
+            data: ['1901', '1906', '2001', '2004', '2007', '2102', '2104', '2105', '2106', '2111']
+          }
+        ],
+        yAxis: [
+          {
+            type: 'value'
+          }
+        ],
         series: [
           {
-            name: '赛时未提交数',
+            name: 'ac积分总和',
             type: 'bar',
-            stack: 'total',
-            // label: {
-            //   show: false
-            // },
+            barGap: 0,
+            label: labelOption,
             emphasis: {
               focus: 'series'
             },
-            data: [320, 302, 301, 334, 390, 330, 320]
+            data: [910, 1689, 1384, 2754, 16058, 14487, 1133, 699, 905, 1134]
           },
           {
-            name: '补题未通过数',
+            name: 'cf积分总和',
             type: 'bar',
-            stack: 'total',
-            // label: {
-            //   show: true
-            // },
+            label: labelOption,
             emphasis: {
               focus: 'series'
             },
-            data: [120, 132, 101, 134, 90, 230, 210]
-          },
-          {
-            name: '赛时AC数',
-            type: 'bar',
-            stack: 'total',
-            // label: {
-            //   show: true
-            // },
-            emphasis: {
-              focus: 'series'
-            },
-            data: [220, 182, 191, 234, 290, 330, 310]
-          },
-          {
-            name: '补题AC数',
-            type: 'bar',
-            stack: 'total',
-            // label: {
-            //   show: true
-            // },
-            emphasis: {
-              focus: 'series'
-            },
-            data: [150, 212, 201, 154, 190, 330, 410]
+            data: [1721, 2972, 3383, 3784, 21659, 20611, 1734, 5582, 1709, 1866]
           }
         ]
       }
 
-      option && this.myChart.setOption(option)
+      myChart.setOption(option)
     }
-  },
-  mounted () {
-    setTimeout(() => {
-      this.InitCharts()
-    }, 20)
   }
 }
 </script>
 
 <style scoped>
-.main {
-  width: 625px;
-  height: 300px;
-  margin: 0px;
+#main {
+  width: 100%;
+  height: 600px;
 }
 </style>

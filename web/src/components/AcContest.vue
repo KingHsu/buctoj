@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Atcoder 比赛列表</h1>
+    <h3>Atcoder 比赛列表</h3>
 
     <el-table :data="tableData" style="width: 100%">
       <el-table-column prop="acContestId" label="比赛ID"></el-table-column>
@@ -8,7 +8,7 @@
       <el-table-column prop="acDate" label="日期"></el-table-column>
 
     </el-table>
-    <el-pagination
+    <!-- <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
       :current-page="pageNum"
@@ -16,7 +16,7 @@
       :page-size="pageSize"
       layout="total, sizes, prev, pager, next, jumper"
       :total="total">
-    </el-pagination>
+    </el-pagination> -->
   </div>
 </template>
 
@@ -25,7 +25,14 @@ export default {
   data () {
     return {
       tableData: [
-
+        { acContestId: '1', acContest: 'Contest 1', acDate: '2023-01-01' },
+        { acContestId: '2', acContest: 'Contest 2', acDate: '2023-01-02' },
+        { acContestId: '3', acContest: 'Contest 3', acDate: '2023-01-03' },
+        { acContestId: '4', acContest: 'Contest 4', acDate: '2023-01-04' },
+        { acContestId: '1', acContest: 'Contest 1', acDate: '2023-01-01' },
+        { acContestId: '2', acContest: 'Contest 2', acDate: '2023-01-02' },
+        { acContestId: '3', acContest: 'Contest 3', acDate: '2023-01-03' },
+        { acContestId: '4', acContest: 'Contest 4', acDate: '2023-01-04' },
         { acContestId: '1', acContest: 'Contest 1', acDate: '2023-01-01' },
         { acContestId: '2', acContest: 'Contest 2', acDate: '2023-01-02' },
         { acContestId: '3', acContest: 'Contest 3', acDate: '2023-01-03' },
@@ -52,6 +59,7 @@ export default {
     }
   },
   methods: {
+
     fetchContests () {
       // 模拟数据，不需要实际请求
       console.log('Fetching contests...')

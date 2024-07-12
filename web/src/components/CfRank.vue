@@ -19,7 +19,7 @@
 
     </el-table>
 
-    <div style="text-align: center; margin-top: 20px;">
+    <!-- <div style="text-align: center; margin-top: 20px;">
       <el-pagination
         @current-change="handlePageChange"
         @size-change="handleSizeChange"
@@ -29,7 +29,7 @@
         layout="total, sizes, prev, pager, next, jumper"
         :total="total">
       </el-pagination>
-    </div>
+    </div> -->
   </div>
 </template>
 
