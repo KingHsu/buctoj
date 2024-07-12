@@ -19,10 +19,15 @@
         <el-menu-item route="/EchartTwo" index="5-2">图表2</el-menu-item>
         <el-menu-item route="/EchartThree" index="5-3">图表3</el-menu-item>
       </el-submenu>
-      <el-menu-item route="/LoginIndex" index="6">登录</el-menu-item>
-      <el-menu-item route="/RegisterIndex" index="7">注册</el-menu-item>
+      <el-menu-item index="6" v-if="!isLoggedIn" @click="login">登录</el-menu-item>
+      <el-menu-item index="6" v-else @click="logout">
+        <!-- 使用img标签插入默认头像，并设置点击事件 -->
+        <img src="/img/tx.png" alt="User Avatar" @click.stop="logout" class="avatar">
+        退出登录
+      </el-menu-item>
+      <el-menu-item route="/RegisterIndex" index="7" v-if="!isLoggedIn">注册</el-menu-item>
     </el-menu>
-    <router-view></router-view>
+    <router-view @login-success="setLoginStatus"></router-view>
   </div>
 </template>
 
@@ -31,17 +36,37 @@ export default {
   name: 'LayoutIndex',
   data () {
     return {
-      activeIndex: '1'
+      activeIndex: '1',
+      isLoggedIn: false // 用于跟踪用户登录状态
     }
   },
   methods: {
     handleSelect (key, keyPath) {
       console.log(key, keyPath)
+    },
+    logout () {
+      // 这里添加退出登录的逻辑
+      // 例如清除本地存储的用户信息，跳转到登录页面等
+      this.isLoggedIn = false
+      this.$router.replace('/OjHome')
+    },
+    login () {
+      this.$router.replace('/LoginIndex')
+    },
+    setLoginStatus () {
+      this.isLoggedIn = true
     }
   }
 }
 </script>
 
 <style scoped>
-
+.avatar {
+  width: 40px; /* 根据需要调整头像大小 */
+  height: 40px;
+  border-radius: 50%; /* 圆形头像 */
+  cursor: pointer; /* 鼠标悬停时显示手型图标 */
+  vertical-align: middle; /* 垂直居中 */
+  margin-right: 5px; /* 与文本保持一定间距 */
+}
 </style>

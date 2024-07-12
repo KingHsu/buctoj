@@ -52,7 +52,9 @@ export default {
           this.$axios.post(this.$httpUrl + '/student/login', this.loginForm).then(res => res.data).then(res => {
             console.log(res)
             if (res.code === 200) {
-              // 跳转到主页
+              // 登录成功，更新状态
+              // 触发事件，通知 LayoutIndex 组件更新状态
+              this.$emit('login-success')
               this.$router.replace('/OjHome')
             } else {
               this.confirm_disabled = false

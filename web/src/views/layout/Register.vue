@@ -85,7 +85,7 @@ export default {
       this.$axios.post(this.$httpUrl + '/student/register', this.registerForm)
       setTimeout(() => {
         this.$router.replace({
-          path: '/OjHome'
+          path: '/LoginIndex'
         })
       }, 3000)
       //   }
