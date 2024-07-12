@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p class="title">Atcoder 比赛列表</p>
+    <router-link to="/AtcoderList"><p class="title">Atcoder 比赛列表</p></router-link>
     <el-table :data="tableData" style="width: 100%" class="contest-table">
       <el-table-column prop="acContestId" label="比赛ID"></el-table-column>
       <el-table-column prop="acContest" label="比赛名称"></el-table-column>

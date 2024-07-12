@@ -11,9 +11,8 @@
     :data="tableData"
     style="width: 100%">
       <el-table-column
-      prop="stuNo"
-      label="ID"
-      width="180">
+          prop="stuUsername"
+          label="用户名">
       </el-table-column>
       <el-table-column
           prop="stuName"
@@ -25,12 +24,16 @@
           label="班级">
       </el-table-column>
       <el-table-column
-          prop="stuUsername"
-          label="用户名">
-      </el-table-column>
-      <el-table-column
           prop="stuNum"
           label="学号">
+      </el-table-column>
+      <el-table-column
+          prop="stuCfId"
+          label="cf用户名">
+      </el-table-column>
+      <el-table-column
+          prop="stuAcId"
+          label="ac用户名">
       </el-table-column>
   </el-table>
     <el-pagination
@@ -123,10 +126,12 @@ export default {
       stuNum: '',
       centerDialogVisible: false,
       form: {
-        stuNo: '',
         stuName: '',
+        stuUsername: '',
         stuClass: '',
-        stuUsername: ''
+        stuNum: '',
+        stuCfId: '',
+        stuAcId: ''
       }
       //   rules: {
       //       no: [

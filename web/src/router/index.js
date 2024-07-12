@@ -9,9 +9,10 @@ import AtcoderList from '@/views/Atcoder/AtcoderList.vue'
 import AtcoderRank from '@/views/Atcoder/AtcoderRank.vue'
 import LoginIndex from '@/views/layout/Login.vue'
 import RegisterIndex from '@/views/layout/Register.vue'
-import EchartOne from '@/views/Echarts/EchartOne.vue'
-import EchartTwo from '@/views/Echarts/EchartTwo.vue'
-import EchartThree from '@/views/Echarts/EchartThree.vue'
+import CodeforcesChart from '@/views/Echarts/CodeforcesChart.vue'
+import AtcoderChart from '@/views/Echarts/AtcoderChart.vue'
+import StuChart from '@/views/Echarts/StuChart.vue'
+import ClassChart from '@/views/Echarts/ClassChart.vue'
 import NotFound from '@/views/layout/NotFound.vue'
 Vue.use(VueRouter)
 
@@ -46,16 +47,20 @@ const routes = [
         component: AtcoderRank
       },
       {
-        path: 'EchartOne',
-        component: EchartOne
+        path: 'CodeforcesChart',
+        component: CodeforcesChart
       },
       {
-        path: 'EchartTwo',
-        component: EchartTwo
+        path: 'AtcoderChart',
+        component: AtcoderChart
       },
       {
-        path: 'EchartThree',
-        component: EchartThree
+        path: 'StuChart',
+        component: StuChart
+      },
+      {
+        path: 'ClassChart',
+        component: ClassChart
       },
       {
         path: 'LoginIndex',

@@ -1,8 +1,5 @@
 <template>
   <el-container>
-    <el-header>
-      <h2>班级积分综合对比柱状图</h2>
-    </el-header>
     <el-main>
       <div id="main" style="width: 100%; height: 600px;"></div>
     </el-main>
@@ -37,6 +34,9 @@ export default {
       }
 
       const option = {
+        title: {
+          text: '班级积分综合对比柱状图'
+        },
         tooltip: {
           trigger: 'axis',
           axisPointer: {

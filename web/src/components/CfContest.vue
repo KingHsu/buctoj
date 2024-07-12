@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p class="title">Codeforces 比赛列表</p>
+    <router-link to="/CodeforcesList"><p class="title">Codeforces 比赛列表</p></router-link>
     <el-table :data="tableData" style="width: 100%">
       <el-table-column prop="cfContestId" label="比赛ID"></el-table-column>
       <el-table-column prop="cfContest" label="比赛名称"></el-table-column>

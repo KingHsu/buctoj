@@ -15,9 +15,10 @@
       </el-submenu>
       <el-submenu index="5">
         <template slot="title">图表</template>
-        <el-menu-item route="/EchartOne" index="5-1">图表1</el-menu-item>
-        <el-menu-item route="/EchartTwo" index="5-2">图表2</el-menu-item>
-        <el-menu-item route="/EchartThree" index="5-3">图表3</el-menu-item>
+        <el-menu-item route="/CodeforcesChart" index="5-1">用户参加比赛数占比图(codeforces)</el-menu-item>
+        <el-menu-item route="/AtcoderChart" index="5-2">用户参加比赛数占比图(atcoder)</el-menu-item>
+        <el-menu-item route="/StuChart" index="5-3">学生新旧积分对比条形图</el-menu-item>
+        <el-menu-item route="/ClassChart" index="5-4">班级积分综合对比柱状图</el-menu-item>
       </el-submenu>
       <el-menu-item index="6" v-if="!isLoggedIn" @click="login">登录</el-menu-item>
       <el-menu-item index="6" v-else @click="logout">
