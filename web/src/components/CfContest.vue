@@ -1,7 +1,6 @@
 <template>
   <div>
-    <h1>Codeforces 比赛列表</h1>
-
+    <p class="title">Codeforces 比赛列表</p>
     <el-table :data="tableData" style="width: 100%">
       <el-table-column prop="cfContestId" label="比赛ID"></el-table-column>
       <el-table-column prop="cfContest" label="比赛名称"></el-table-column>
@@ -83,8 +82,14 @@ export default {
 </script>
 
 <style scoped>
-.el-table {
-  margin-top: 20px;
+.title {
+  font-size: 16px;
+  margin: 10px 0;
+  line-height: 1;
+}
+
+.el-table th, .el-table td {
+  padding: 4px 0;
 }
 
 .el-input {

@@ -1,10 +1,10 @@
 <template>
   <div>
-    <h1>Atcoder 账户排名</h1>
+    <p class="title">Atcoder 账户排名</p>
     <el-table
       :data="ranks"
       style="width: 100%"
-      @sort-change="handleSortChange">
+      @sort-change="handleSortChange" class="contest-table">
       <el-table-column
         prop="acId"
         label="用户名"
@@ -92,8 +92,14 @@ export default {
 </script>
 
 <style scoped>
-.el-table {
-  margin-top: 20px;
+.title {
+  font-size: 16px;
+  margin: 10px 0;
+  line-height: 1;
+}
+
+.el-table th, .el-table td {
+  padding: 4px 0;
 }
 
 .el-input {

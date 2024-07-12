@@ -2,7 +2,7 @@
   <el-container>
 
     <el-main>
-      <div id="main" style="width: 100%; height: 600px;"></div>
+      <div id="main" style="width: 100%; height: 400px;"></div>
     </el-main>
   </el-container>
 </template>
