@@ -1,12 +1,10 @@
 <template>
   <div>
-    <h3>Atcoder 比赛列表</h3>
-
-    <el-table :data="tableData" style="width: 100%">
+    <p class="title">Atcoder 比赛列表</p>
+    <el-table :data="tableData" style="width: 100%" class="contest-table">
       <el-table-column prop="acContestId" label="比赛ID"></el-table-column>
       <el-table-column prop="acContest" label="比赛名称"></el-table-column>
       <el-table-column prop="acDate" label="日期"></el-table-column>
-
     </el-table>
     <!-- <el-pagination
       @size-change="handleSizeChange"
@@ -111,12 +109,18 @@ export default {
 </script>
 
 <style scoped>
-.el-table {
-  margin-top: 20px;
+.title {
+  font-size: 16px;
+  margin: 1px 0;
+  line-height: 1;
+}
+
+.el-table th, .el-table td {
+  padding: 1px 0;
 }
 
 .el-input {
-  width: 300px;
+  width: 50px;
 }
 
 .el-button {
