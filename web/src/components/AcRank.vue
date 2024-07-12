@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p class="title">Atcoder 账户排名</p>
+    <router-link to="/AtcoderRank"><p class="title">Atcoder 账户排名</p></router-link>
     <el-table
       :data="ranks"
       style="width: 100%"

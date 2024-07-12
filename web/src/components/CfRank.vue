@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p class="title">Codeforces 账户排名</p>
+    <router-link to="/CodeforcesRank"><p class="title">Codeforces 账户排名</p></router-link>
     <el-table
       :data="ranks"
       style="width: 100%"

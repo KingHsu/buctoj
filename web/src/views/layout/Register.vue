@@ -30,7 +30,7 @@
                                autocomplete="off" size="small" ></el-input>
                   </el-form-item>
                   <el-form-item>
-                      <el-button type="primary" @click="confirm()" :disabled="confirm_disabled">提交</el-button>
+                      <el-button style="margin-left: 50px" type="primary" @click="confirm()" :disabled="confirm_disabled">提交</el-button>
                   </el-form-item>
               </el-form>
           </div>
@@ -87,7 +87,7 @@ export default {
         this.$router.replace({
           path: '/LoginIndex'
         })
-      }, 3000)
+      }, 1000)
       //   }
     }
   }
