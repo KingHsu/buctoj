@@ -78,7 +78,7 @@ export default {
       position: absolute;
       width: 100%;
       height: 100%;
-      background-color: #B3C0D1;
+      background-color: #c5d7ef;
   }
   .loginDiv {
       position: absolute;

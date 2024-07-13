@@ -1,51 +1,62 @@
 <template>
   <div>
-    <div style="margin-bottom: 5px;">
-        <el-input v-model="stuNum" placeholder="请输入学号" suffix-icon="el-icon-search" style="width: 200px;"
-                  @keyup.enter.native="loadPost"></el-input>
-        <el-button type="primary" style="margin-left: 5px;" @click="loadPost">查询</el-button>
+    <div style=" display: flex; justify-content:space-between; margin: 0 15px">
+      <div><h3>用户列表</h3></div>
+      <div style="margin-bottom: 5px;">
+        <el-input
+          v-model="stuNum"
+          placeholder="请输入学号"
+          suffix-icon="el-icon-search"
+          style="width: 300px; margin-right: 10px;"
+          @keyup.enter.native="loadPost">
+        </el-input>
+        <el-button type="primary" @click="loadPost">查询</el-button>
         <el-button type="success" @click="resetParam">重置</el-button>
-
+      </div>
     </div>
-    <el-table
-    :data="tableData"
-    style="width: 100%">
-      <el-table-column
-          prop="stuUsername"
-          label="用户名">
-      </el-table-column>
-      <el-table-column
-          prop="stuName"
-          label="姓名"
-          width="180">
-      </el-table-column>
-      <el-table-column
-          prop="stuClass"
-          label="班级">
-      </el-table-column>
-      <el-table-column
-          prop="stuNum"
-          label="学号">
-      </el-table-column>
-      <el-table-column
-          prop="stuCfId"
-          label="cf用户名">
-      </el-table-column>
-      <el-table-column
-          prop="stuAcId"
-          label="ac用户名">
-      </el-table-column>
-  </el-table>
-    <el-pagination
-            @size-change="handleSizeChange"
-            @current-change="handleCurrentChange"
-            :current-page="pageNum"
-            :page-sizes="[5, 10, 20,30]"
-            :page-size="pageSize"
-            layout="total, sizes, prev, pager, next, jumper"
-            :total="total">
-    </el-pagination>
 
+    <div>
+      <el-table
+      :data="tableData"
+      style="width: 100%">
+        <el-table-column
+            prop="stuUsername"
+            label="用户名">
+        </el-table-column>
+        <el-table-column
+            prop="stuName"
+            label="姓名"
+            width="180">
+        </el-table-column>
+        <el-table-column
+            prop="stuClass"
+            label="班级">
+        </el-table-column>
+        <el-table-column
+            prop="stuNum"
+            label="学号">
+        </el-table-column>
+        <el-table-column
+            prop="stuCfId"
+            label="cf用户名">
+        </el-table-column>
+        <el-table-column
+            prop="stuAcId"
+            label="ac用户名">
+        </el-table-column>
+      </el-table>
+    </div>
+    <div style="text-align: center;margin:auto;">
+      <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="pageNum"
+        :page-sizes="[5, 10, 20,30]"
+        :page-size="pageSize"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="total">
+      </el-pagination>
+    </div>
     <!-- <el-dialog
             title="提示"
             :visible.sync="centerDialogVisible"

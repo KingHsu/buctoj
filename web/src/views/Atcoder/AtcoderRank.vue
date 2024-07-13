@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Atcoder 账户排名</h1>
+    <h3>Atcoder 账户排名</h3>
     <el-table
       :data="ranks"
       style="width: 100%"
@@ -48,7 +48,7 @@
     </el-table-column>
     </el-table>
 
-    <div style="text-align: center; margin-top: 20px;">
+    <div style="text-align: center; margin: auto;">
       <el-pagination
         @current-change="handlePageChange"
         @size-change="handleSizeChange"
@@ -127,10 +127,6 @@ export default {
 
 .el-input {
   width: 300px;
-}
-
-.el-pagination {
-  margin-top: 20px;
 }
 
 .el-button {
