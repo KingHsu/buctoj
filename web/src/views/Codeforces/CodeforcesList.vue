@@ -7,7 +7,8 @@
         v-model="searchQuery"
         placeholder="输入比赛名称进行搜索"
         style="width: 300px; margin-right: 10px;"
-        suffix-icon="el-icon-search">
+        suffix-icon="el-icon-search"
+        @keyup.enter.native="fetchContests">
       </el-input>
       <el-button type="primary" @click="fetchContests">查询</el-button>
       <el-button type="success" @click="resetParam">重置</el-button>
@@ -36,6 +37,7 @@
 </template>
 
 <script>
+import { Message } from 'element-ui'
 export default {
   data () {
     return {
@@ -71,6 +73,27 @@ export default {
         if (res.code === 200) {
           this.tableData = res.data
           this.total = res.total
+        } else {
+          alert('获取数据失败')
+        }
+      })
+    },
+    loadInquire () {
+      this.$axios.post(this.$httpUrl + '/cfContest/listPage', {
+        pageSize: this.pageSize,
+        pageNum: this.pageNum,
+        param: {
+          cfContest: this.searchQuery
+        }
+      }).then(res => res.data).then(res => {
+        console.log(res.data)
+        if (res.code === 200) {
+          this.tableData = res.data
+          this.total = res.total
+          Message({
+            message: '查询成功！',
+            type: 'success'
+          })
         } else {
           alert('获取数据失败')
         }

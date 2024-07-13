@@ -23,6 +23,9 @@
 </template>
 
 <script>
+// import request from '@/utils/request'
+import { Message } from 'element-ui'
+
 export default {
   name: 'LoginIndex',
   data () {
@@ -54,6 +57,10 @@ export default {
             if (res.code === 200) {
               // 登录成功，更新状态
               // 触发事件，通知 LayoutIndex 组件更新状态
+              Message({
+                message: '登录成功',
+                type: 'success'
+              })
               this.$emit('login-success')
               this.$router.replace('/OjHome')
             } else {

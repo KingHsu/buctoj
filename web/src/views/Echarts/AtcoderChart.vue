@@ -107,7 +107,7 @@ export default {
   mounted () {
     setTimeout(() => {
       this.InitCharts()
-    }, 20)
+    }, 400)
   },
   created () {
     this.getData()

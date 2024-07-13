@@ -8,9 +8,9 @@
           placeholder="请输入学号"
           suffix-icon="el-icon-search"
           style="width: 300px; margin-right: 10px;"
-          @keyup.enter.native="loadPost">
+          @keyup.enter.native="loadInquire">
         </el-input>
-        <el-button type="primary" @click="loadPost">查询</el-button>
+        <el-button type="primary" @click="loadInquire">查询</el-button>
         <el-button type="success" @click="resetParam">重置</el-button>
       </div>
     </div>
@@ -105,6 +105,8 @@
 </template>
 
 <script>
+import { Message } from 'element-ui'
+
 export default {
   name: 'UserList',
   data () {
@@ -302,6 +304,27 @@ export default {
         if (res.code === 200) {
           this.tableData = res.data
           this.total = res.total
+        } else {
+          alert('获取数据失败')
+        }
+      })
+    },
+    loadInquire () {
+      this.$axios.post(this.$httpUrl + '/student/listPage', {
+        pageSize: this.pageSize,
+        pageNum: this.pageNum,
+        param: {
+          stuNum: this.stuNum
+        }
+      }).then(res => res.data).then(res => {
+        console.log(res)
+        if (res.code === 200) {
+          this.tableData = res.data
+          this.total = res.total
+          Message({
+            message: '查询成功！',
+            type: 'success'
+          })
         } else {
           alert('获取数据失败')
         }

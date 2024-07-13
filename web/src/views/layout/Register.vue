@@ -39,6 +39,7 @@
 </template>
 
 <script>
+import { Message } from 'element-ui'
 export default {
   name: 'RegisterIndex',
   data () {
@@ -83,6 +84,10 @@ export default {
       //     this.registerForm.confirmpw = ''
       //   } else {
       this.$axios.post(this.$httpUrl + '/student/register', this.registerForm)
+      Message({
+        message: '注册成功！',
+        type: 'success'
+      })
       setTimeout(() => {
         this.$router.replace({
           path: '/LoginIndex'

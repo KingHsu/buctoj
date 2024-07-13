@@ -33,6 +33,8 @@
 </template>
 
 <script>
+import { Message } from 'element-ui'
+
 export default {
   name: 'LayoutIndex',
   data () {
@@ -49,6 +51,10 @@ export default {
       // 这里添加退出登录的逻辑
       // 例如清除本地存储的用户信息，跳转到登录页面等
       this.isLoggedIn = false
+      Message({
+        message: '已退出登录！',
+        type: 'warning'
+      })
       this.$router.replace('/OjHome')
     },
     login () {

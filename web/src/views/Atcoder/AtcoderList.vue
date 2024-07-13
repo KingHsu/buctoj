@@ -7,9 +7,9 @@
         v-model="searchQuery"
         placeholder="输入比赛名称进行搜索"
         style="width: 300px;  margin-right: 10px;"
-        @keyup.enter.native="loadPost">
+        @keyup.enter.native="loadInquire">
       </el-input>
-      <el-button type="primary" @click="loadPost">查询</el-button>
+      <el-button type="primary" @click="loadInquire">查询</el-button>
       <el-button type="success" @click="resetParam">重置</el-button>
       </div>
     </div>
@@ -36,6 +36,8 @@
 </template>
 
 <script>
+import { Message } from 'element-ui'
+
 export default {
   data () {
     return {
@@ -78,12 +80,32 @@ export default {
         pageSize: this.pageSize,
         pageNum: this.pageNum,
         param: {
-          acContest: this.acContest
+          acContest: this.searchQuery
         }
       }).then(res => res.data).then(res => {
         if (res.code === 200) {
           this.tableData = res.data
           this.total = res.total
+        } else {
+          alert('获取数据失败')
+        }
+      })
+    },
+    loadInquire () {
+      this.$axios.post(this.$httpUrl + '/acContest/listPage', {
+        pageSize: this.pageSize,
+        pageNum: this.pageNum,
+        param: {
+          acContest: this.searchQuery
+        }
+      }).then(res => res.data).then(res => {
+        if (res.code === 200) {
+          this.tableData = res.data
+          this.total = res.total
+          Message({
+            message: '查询成功！',
+            type: 'success'
+          })
         } else {
           alert('获取数据失败')
         }
