@@ -57,11 +57,13 @@ export default {
             if (res.code === 200) {
               // 登录成功，更新状态
               // 触发事件，通知 LayoutIndex 组件更新状态
+              this.$store.commit('setting/login')// 更新登录状态
+              this.$store.commit('setting/setAdmin', res.data)// 更新身份信息
               Message({
                 message: '登录成功',
                 type: 'success'
               })
-              this.$emit('login-success')
+              this.$emit('login-success')// 触发父组件Layout，改变其isLoggedIn
               this.$router.replace('/OjHome')
             } else {
               this.confirm_disabled = false

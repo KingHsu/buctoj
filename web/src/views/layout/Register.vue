@@ -3,15 +3,26 @@
       <div class="loginDiv">
           <div class="login-content">
               <h1 class="login-title">用户注册</h1>
-              <el-form :model="loginForm" label-width="100px"
+              <el-form :model="registerForm" label-width="100px"
                        :rules="rules" ref="loginForm">
                   <el-form-item label="用户名" prop="stuUsername">
-                      <el-input style="width: 200px" type="text" v-model="registerForm.stuUsername"
-                                autocomplete="off" size="small"></el-input>
+                      <el-input
+                        style="width: 200px"
+                        type="text"
+                        v-model="registerForm.stuUsername"
+                        autocomplete="off"
+                        size="small">
+                      </el-input>
                   </el-form-item>
                   <el-form-item label="密码" prop="stuPassword">
-                      <el-input style="width: 200px" type="password" v-model="registerForm.stuPassword"
-                                show-password autocomplete="off" size="small" ></el-input>
+                      <el-input
+                        style="width: 200px"
+                        type="password"
+                        v-model="registerForm.stuPassword"
+                        show-password
+                        autocomplete="off"
+                        size="small">
+                      </el-input>
                   </el-form-item>
                   <el-form-item label="确认密码" prop="confirmpw">
                     <el-input style="width: 200px" type="password" v-model="registerForm.confirmpw"
@@ -19,11 +30,11 @@
                   </el-form-item>
                   <el-form-item label="班级" prop="stuClass">
                     <el-input style="width: 200px" type="text" v-model="registerForm.stuClass"
-                              placeholder="请输入4位数字" autocomplete="off" size="small" ></el-input>
+                              placeholder="请输入4位数字的班级代号" autocomplete="off" size="small" ></el-input>
                   </el-form-item>
                   <el-form-item label="学号" prop="stuNum">
                   <el-input style="width: 200px" type="text" v-model="registerForm.stuNum"
-                             autocomplete="off" size="small" ></el-input>
+                             autocomplete="off" size="small" placeholder="请输入10位数字的学号"></el-input>
                   </el-form-item>
                   <el-form-item label="姓名" prop="stuName">
                     <el-input style="width: 200px" type="text" v-model="registerForm.stuName"
@@ -43,6 +54,38 @@ import { Message } from 'element-ui'
 export default {
   name: 'RegisterIndex',
   data () {
+    const checkPasswdRe = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请再次输入密码'))
+      } else if (value !== this.registerForm.stuPassword) {
+        callback(new Error('两次输入密码不一致!'))
+      } else {
+        callback()
+      }
+    }
+    // 正则校验主要是这部分：/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[._~!@#$^&*])[A-Za-z0-9._~!@#$^&*]{8,16}$
+    // 其中特殊字符包括：._~!@#$^&*  （比较常见）
+    const newValValidate = (rule, value, callback) => {
+      if (/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[._~!@#$^&*])[A-Za-z0-9._~!@#$^&*]{8,16}$/g.test(value)) {
+        callback()
+      } else {
+        callback(new Error('请输入包含英文字母大小写、数字和特殊符号的 8-16 位组合'))
+      }
+    }
+    const classValidate = (rule, value, callback) => {
+      if (/^\d{4}$/.test(value)) {
+        callback()
+      } else {
+        callback(new Error('请输入4位数字的班级代号'))
+      }
+    }
+    const stuNumValidate = (rule, value, callback) => {
+      if (/^\d{10}$/.test(value)) {
+        callback()
+      } else {
+        callback(new Error('请输入10位数字的学号'))
+      }
+    }
     return {
       confirm_disabled: false,
       confirmpw: '',
@@ -52,23 +95,34 @@ export default {
         stuClass: '',
         stuName: '',
         stuNum: '',
-        stuNo: ''
+        stuNo: '',
+        stuMan: '0'
       },
       rules: {
         stuUsername: [
           { required: true, message: '请输入用户名', trigger: 'blur' }
         ],
         stuPassword: [
-          { required: true, message: '请输入密码', trigger: 'blur' }
+          { required: true, message: '请输入密码', trigger: 'blur' },
+          {
+            min: 8,
+            max: 16,
+            message: '长度应在 8 到 16 个字符',
+            trigger: 'blur'
+          },
+          { validator: newValValidate, trigger: 'blur' }
         ],
         confirmpw: [
-          { required: true, message: '请确认密码', trigger: 'blur' }
+          { required: true, message: '请确认密码', trigger: 'blur' },
+          { validator: checkPasswdRe, trigger: 'blur' }
         ],
         stuClass: [
-          { required: true, message: '请输入班级', trigger: 'blur' }
+          { required: true, message: '请输入班级', trigger: 'blur' },
+          { validator: classValidate, trigger: 'blur' }
         ],
         stuNum: [
-          { required: true, message: '请输入学号', trigger: 'blur' }
+          { required: true, message: '请输入学号', trigger: 'blur' },
+          { validator: stuNumValidate, trigger: 'blur' }
         ],
         stuName: [
           { required: true, message: '请输入姓名', trigger: 'blur' }
@@ -79,10 +133,6 @@ export default {
   methods: {
     confirm () {
       this.confirm_disabled = true
-      //   if(this.registerForm.stuPassword !== this.registerForm.confirmpw) {
-      //     alert('两次输入密码不一致，请重新输入！'),
-      //     this.registerForm.confirmpw = ''
-      //   } else {
       this.$axios.post(this.$httpUrl + '/student/register', this.registerForm)
       Message({
         message: '注册成功！',
@@ -93,7 +143,6 @@ export default {
           path: '/LoginIndex'
         })
       }, 1000)
-      //   }
     }
   }
 
@@ -114,7 +163,7 @@ export default {
       margin-top: -200px;
       margin-left: -250px;
       width: 450px;
-      height: 550px;
+      height: 600px;
       background: #fff;
       border-radius: 5%;
 
@@ -129,5 +178,8 @@ export default {
       position: absolute;
       top: 25px;
       left: 25px;
+  }
+  .el-form-item {
+    margin: 30px 0px;
   }
 </style>

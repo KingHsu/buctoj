@@ -1,6 +1,7 @@
 <template>
-  <div>
-    <el-menu class="el-menu-demo" mode="horizontal" @select="handleSelect" router="true">
+  <div class="main">
+    <div>
+      <el-menu class="el-menu-demo;" mode="horizontal" @select="handleSelect" router="true">
       <el-menu-item route="/OjHome" index="1" >首页</el-menu-item>
       <el-menu-item route="/UserList" index="2" >用户列表</el-menu-item>
       <el-submenu index="3">
@@ -20,28 +21,33 @@
         <el-menu-item route="/StuChart" index="5-3">学生新旧积分对比条形图</el-menu-item>
         <el-menu-item route="/ClassChart" index="5-4">班级积分综合对比柱状图</el-menu-item>
       </el-submenu>
-      <el-menu-item index="6" v-if="!isLoggedIn" @click="login">登录</el-menu-item>
-      <el-menu-item index="6" v-else @click="logout">
+      <el-menu-item index="6" v-if="!isLoggedIn" @click="login" style="float: right">登录</el-menu-item>
+      <el-menu-item index="6" v-else @click="logout" style="float: right">
         <!-- 使用img标签插入默认头像，并设置点击事件 -->
         <img src="/img/tx.png" alt="User Avatar" @click.stop="logout" class="avatar">
         退出登录
       </el-menu-item>
-      <el-menu-item route="/RegisterIndex" index="7" v-if="!isLoggedIn">注册</el-menu-item>
+      <el-menu-item route="/RegisterIndex" index="7" v-if="!isLoggedIn" style="float: right">注册</el-menu-item>
     </el-menu>
+    </div>
+
     <router-view @login-success="setLoginStatus"></router-view>
   </div>
 </template>
 
 <script>
 import { Message } from 'element-ui'
-
+import { mapState } from 'vuex'
 export default {
   name: 'LayoutIndex',
   data () {
     return {
       activeIndex: '1',
-      isLoggedIn: false // 用于跟踪用户登录状态
+      isLoggedIn: false
     }
+  },
+  mutations: {
+    ...mapState('setting', ['logState'])
   },
   methods: {
     handleSelect (key, keyPath) {
@@ -50,7 +56,9 @@ export default {
     logout () {
       // 这里添加退出登录的逻辑
       // 例如清除本地存储的用户信息，跳转到登录页面等
-      this.isLoggedIn = false
+      this.$store.dispatch('setting/logout')// 修改vuex里的登录状态
+      this.isLoggedIn = this.$store.getters['setting/getLogState']
+      console.log(this.isLoggedIn)
       Message({
         message: '已退出登录！',
         type: 'warning'
@@ -62,6 +70,7 @@ export default {
     },
     setLoginStatus () {
       this.isLoggedIn = true
+      this.id = 1
     }
   }
 }
