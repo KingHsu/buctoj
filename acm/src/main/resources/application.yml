@@ -1,6 +1,12 @@
 server:
   port: 9090
 
+mybatis-plus:
+  global-config:
+    db-config:
+      id-type: AUTO
+
+
 spring:
   datasource:
     username: root
