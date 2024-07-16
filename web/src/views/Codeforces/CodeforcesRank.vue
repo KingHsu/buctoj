@@ -8,44 +8,50 @@
       <el-table-column
         prop="cfId"
         label="用户名"
-        width="200">
+        width="200"
+        align="center">
       </el-table-column>
       <el-table-column
         prop="cfSumContest"
         label="参与比赛总数"
         width="200"
         sortable="custom"
-        >
+        align="center">
       </el-table-column>
       <el-table-column
         prop="cfContest"
         label="比赛名称"
-        width="300">
+        align="center">
       </el-table-column>
       <el-table-column
         prop="cfContestId"
-        label="比赛名称ID"
-        width="200">
+        label="比赛ID"
+        width="100"
+        align="center">
       </el-table-column>
       <el-table-column
         prop="cfRank"
         label="比赛排名"
-        width="200">
+        width="100"
+        align="center">
       </el-table-column>
       <el-table-column
         prop="cfOldRating"
         label="旧积分"
-        width="200">
+        width="100"
+        align="center">
       </el-table-column>
       <el-table-column
         prop="cfNewRating"
         label="最新积分"
-        width="200">
+        width="100"
+        align="center">
       </el-table-column>
       <el-table-column
         prop="cfDate"
         label="日期"
-        width="200">
+        width="200"
+        align="center">
     </el-table-column>
     </el-table>
 

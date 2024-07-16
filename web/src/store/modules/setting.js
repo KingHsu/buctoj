@@ -1,9 +1,10 @@
+import { getInfo } from '@/utils/storage'
 export default {
   namespaced: true,
   state () {
     return {
-      logState: false, // 用于跟踪用户登录状态
-      isAdmin: '0' // 用于存储是否为管理员信息
+      logState: getInfo().stuNo !== 0, // 用于跟踪用户登录状态
+      isAdmin: getInfo().stuMan // 用于存储是否为管理员信息
     }
   },
   mutations: {

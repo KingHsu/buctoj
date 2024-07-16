@@ -1,10 +1,12 @@
 import Vue from 'vue'
 import 'element-ui/lib/theme-chalk/index.css'
-import { MessageBox, Tooltip, Message, Button, Select, Menu, MenuItem, Submenu, Table, TableColumn, Input, Pagination, Option, Dialog, Form, FormItem, Container, Aside, Main } from 'element-ui'
+import { TabPane, Tabs, MessageBox, Tooltip, Message, Button, Select, Menu, MenuItem, Submenu, Table, TableColumn, Input, Pagination, Option, Dialog, Form, FormItem, Container, Aside, Main } from 'element-ui'
 
-Vue.use(MessageBox)
+Vue.use(TabPane)
+Vue.use(Tabs)
+Vue.component(MessageBox)
 Vue.use(Tooltip)
-Vue.use(Message)
+Vue.component(Message)
 Vue.use(Button)
 Vue.use(Select)
 Vue.use(Menu)

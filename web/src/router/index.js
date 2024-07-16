@@ -13,6 +13,7 @@ import CodeforcesChart from '@/views/Echarts/CodeforcesChart.vue'
 import AtcoderChart from '@/views/Echarts/AtcoderChart.vue'
 import StuChart from '@/views/Echarts/StuChart.vue'
 import ClassChart from '@/views/Echarts/ClassChart.vue'
+import UserInfo from '@/views/layout/UserInfo.vue'
 import NotFound from '@/views/layout/NotFound.vue'
 Vue.use(VueRouter)
 
@@ -63,12 +64,22 @@ const routes = [
         component: ClassChart
       },
       {
-        path: 'LoginIndex',
-        component: LoginIndex
+        path: '/LoginIndex',
+        component: LoginIndex,
+        meta: {
+          showNav: true
+        }
       },
       {
-        path: 'RegisterIndex',
-        component: RegisterIndex
+        path: '/RegisterIndex',
+        component: RegisterIndex,
+        meta: {
+          showNav: true
+        }
+      },
+      {
+        path: '/UserInfo',
+        component: UserInfo
       }
     ]
   },

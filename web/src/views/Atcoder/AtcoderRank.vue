@@ -8,43 +8,50 @@
       <el-table-column
         prop="acId"
         label="用户名"
-        width="200">
+        width="200"
+        align="center">
       </el-table-column>
       <el-table-column
         prop="acCount"
         label="参与比赛总数"
         width="200"
-        sortable="custom">
+        sortable="custom"
+        align="center">
       </el-table-column>
       <el-table-column
         prop="acContest"
         label="比赛名称"
-        width="300">
+        align="center">
       </el-table-column>
       <el-table-column
         prop="acRank"
         label="排名"
-        width="200">
+        width="100"
+        align="center">
       </el-table-column>
       <el-table-column
       prop="acPerformance"
       label="表现"
-      width="200">
+      width="100"
+      align="center">
       </el-table-column>
       <el-table-column
         prop="acNewRating"
         label="新积分"
-        width="200">
+        width="100"
+        align="center">
       </el-table-column>
       <el-table-column
         prop="acDiff"
         label="积分变化"
-        width="200">
+        width="100"
+        align="center">
       </el-table-column>
       <el-table-column
         prop="acMaxRating"
         label="最高积分"
-        width="200">
+        width="100"
+        align="center">
     </el-table-column>
     </el-table>
 

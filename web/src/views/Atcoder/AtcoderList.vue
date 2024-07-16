@@ -14,12 +14,12 @@
       </div>
     </div>
     <el-table :data="tableData" style="width: 100%">
-      <el-table-column prop="acContestId" label="比赛ID" width="100"></el-table-column>
-      <el-table-column prop="acContest" label="比赛名称"></el-table-column>
-      <el-table-column prop="acType" label="类型" width="100"></el-table-column>
-      <el-table-column prop="acDate" label="日期" width="180"></el-table-column>
-      <el-table-column prop="acTime" label="时间" width="100"></el-table-column>
-      <el-table-column prop="acNum" label="参与人数" width="100"></el-table-column>
+      <el-table-column prop="acContestId" label="比赛ID" width="100" align="center"></el-table-column>
+      <el-table-column prop="acContest" label="比赛名称" align="center"></el-table-column>
+      <el-table-column prop="acType" label="类型" width="100" align="center"></el-table-column>
+      <el-table-column prop="acDate" label="日期" width="180" align="center"></el-table-column>
+      <el-table-column prop="acTime" label="时间" width="100" align="center"></el-table-column>
+      <el-table-column prop="acNum" label="参与人数" width="100" align="center"></el-table-column>
     </el-table>
     <div style="text-align: center;margin:auto;">
       <el-pagination

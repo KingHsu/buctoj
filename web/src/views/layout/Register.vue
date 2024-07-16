@@ -41,7 +41,8 @@
                                autocomplete="off" size="small" ></el-input>
                   </el-form-item>
                   <el-form-item>
-                      <el-button style="margin-left: 50px" type="primary" @click="confirm()" :disabled="confirm_disabled">提交</el-button>
+                      <el-button style="margin-left: 10px" type="primary" @click="confirm" :disabled="confirm_disabled">注册</el-button>
+                      <el-button @click="goIndex">返回首页</el-button>
                   </el-form-item>
               </el-form>
           </div>
@@ -132,6 +133,19 @@ export default {
   },
   methods: {
     confirm () {
+      if (!this.registerForm.stuUsername &&
+        !this.registerForm.stuPassword &&
+        !this.registerForm.stuName &&
+        !this.registerForm.stuNum &&
+        !this.registerForm.stuClass &&
+        !this.confirmpw
+      ) {
+        Message({
+          message: '请输入完整信息后再尝试注册！',
+          type: 'warning'
+        })
+        return
+      }
       this.confirm_disabled = true
       this.$axios.post(this.$httpUrl + '/student/register', this.registerForm)
       Message({
@@ -143,6 +157,9 @@ export default {
           path: '/LoginIndex'
         })
       }, 1000)
+    },
+    goIndex () {
+      this.$router.replace('/OjHome')
     }
   }
 
@@ -154,7 +171,14 @@ export default {
       position: absolute;
       width: 100%;
       height: 100%;
-      background-color: #c5d7ef;
+      background-image: url("../../assets/background.png");
+      background-position: center center;
+      /* 背景图不平铺 */
+      background-repeat: no-repeat;
+      /* 当内容高度大于图片高度时，背景图像的位置相对于viewport固定 */
+      background-attachment: fixed;
+      /* 让背景图基于容器大小伸缩 */
+      background-size: cover;
   }
   .loginDiv {
       position: absolute;
@@ -164,9 +188,9 @@ export default {
       margin-left: -250px;
       width: 450px;
       height: 600px;
-      background: #fff;
+      background-color: #fff;
       border-radius: 5%;
-
+      opacity: 0.80;
   }
   .login-title {
       margin: 20px 0;
@@ -178,6 +202,8 @@ export default {
       position: absolute;
       top: 25px;
       left: 25px;
+      font-family: "YouYuan";
+
   }
   .el-form-item {
     margin: 30px 0px;

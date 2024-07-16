@@ -6,6 +6,7 @@ import './utils/element-ui.js'
 import axios from 'axios'
 
 Vue.prototype.$axios = axios
+Vue.prototype.$store = store
 Vue.prototype.$httpUrl = 'http://localhost:9090'
 Vue.config.productionTip = false
 axios.defaults.withCredentials = true

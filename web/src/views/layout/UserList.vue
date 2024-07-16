@@ -4,7 +4,7 @@
       <div><h3>用户列表</h3></div>
       <div style="margin-bottom: 5px;">
         <el-input
-          v-model="stuNum"
+          v-model="searchQuery"
           placeholder="请输入学号"
           suffix-icon="el-icon-search"
           style="width: 300px; margin-right: 10px;"
@@ -12,7 +12,7 @@
         </el-input>
         <el-button type="primary" @click="loadInquire">查询</el-button>
         <el-button type="success" @click="resetParam">重置</el-button>
-        <el-button v-if="isUserAdmin()" type="success" @click="TJCollectionForm">添加</el-button>
+        <el-button v-if="isUserAdmin()" type="warning" @click="TJCollectionForm">添加</el-button>
       </div>
     </div>
 
@@ -21,34 +21,41 @@
       :data="tableData"
       style="width: 100%">
         <el-table-column
-          label="序号"
-          type="index"
-          align="center" >
+          label="ID"
+          align="center"
+          prop="stuNo"
+          width="100">
         </el-table-column>
         <el-table-column
             prop="stuUsername"
-            label="用户名">
+            label="用户名"
+            align="center">
         </el-table-column>
         <el-table-column
             prop="stuName"
             label="姓名"
-            width="180">
+            width="180"
+            align="center">
         </el-table-column>
         <el-table-column
             prop="stuClass"
-            label="班级">
+            label="班级"
+            align="center">
         </el-table-column>
         <el-table-column
             prop="stuNum"
-            label="学号">
+            label="学号"
+            align="center">
         </el-table-column>
         <el-table-column
             prop="stuCfId"
-            label="cf用户名">
+            label="cf用户名"
+            align="center">
         </el-table-column>
         <el-table-column
             prop="stuAcId"
-            label="ac用户名">
+            label="ac用户名"
+            align="center">
         </el-table-column>
         <el-table-column v-if="isUserAdmin()" fixed="right" label="操作" width="120">
           <template slot-scope="scope">
@@ -143,6 +150,7 @@ export default {
       pageSize: 10,
       pageNum: 1,
       total: 0,
+      searchQuery: '',
       dialogFormVisible: false,
       dialogStatus: 'create',
       textMap: {
@@ -428,7 +436,8 @@ export default {
       await this.$axios.post(this.$httpUrl + '/student/listPage', {
         pageSize: this.pageSize,
         pageNum: this.pageNum,
-        param: {}
+        param: {
+        }
       }).then(res => res.data).then(res => {
         // console.log(res)
         if (res.code === 200) {
@@ -444,7 +453,7 @@ export default {
         pageSize: this.pageSize,
         pageNum: this.pageNum,
         param: {
-          stuNum: this.form.stuNum
+          stuNum: this.searchQuery
         }
       }).then(res => res.data).then(res => {
         console.log(res)
