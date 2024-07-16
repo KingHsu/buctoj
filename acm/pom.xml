@@ -31,6 +31,11 @@
 	</properties>
 	<dependencies>
 		<dependency>
+			<groupId>com.github.whvcse</groupId>
+			<artifactId>easy-captcha</artifactId>
+			<version>1.6.2</version>
+		</dependency>
+		<dependency>
 			<groupId>com.github.xiaoymin</groupId>
 			<artifactId>knife4j-spring-boot-starter</artifactId>
 			<version>3.0.2</version>
@@ -61,7 +66,7 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-	</dependencies>
+    </dependencies>
 
 	<build>
 		<plugins>

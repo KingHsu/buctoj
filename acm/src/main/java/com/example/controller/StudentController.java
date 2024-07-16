@@ -7,13 +7,20 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.common.QueryPageParam;
 import com.example.common.Result;
 import com.example.entity.Student;
+import com.example.service.CaptchaService;
 import com.example.service.StudentService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 
 @RestController
 @RequestMapping("/student")
@@ -23,16 +30,47 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
 
+    @Autowired
+    private CaptchaService captchaService;
+
+
+    @GetMapping("/captcha")
+    @ApiOperation("验证码功能")
+    public Result getCaptcha(HttpSession session) {
+        String base64Image = captchaService.generateCaptcha(session);
+        Map<String, String> response = new HashMap<>();
+        response.put("captchaImage", base64Image);
+        return Result.suc(response);
+    }
+
     //用户登录
     @PostMapping("/login")
     @ApiOperation("用户登录")
-    public Result login(@RequestBody Student student){
-        List list= studentService.lambdaQuery()
-                .eq(Student::getStuUsername,student.getStuUsername())
-                .eq(Student::getStuPassword,student.getStuPassword())
+    public Result login(@RequestBody Map<String, String> requestBody, HttpSession session) {
+        String inputCaptcha = requestBody.get("captcha");
+        String storedCaptcha = (String) session.getAttribute("captcha");
+
+        if (storedCaptcha == null || !storedCaptcha.equalsIgnoreCase(inputCaptcha)) {
+            return Result.fail();
+        }
+        String username = requestBody.get("stuUsername");
+        String password = requestBody.get("stuPassword");
+
+        List list = studentService.lambdaQuery()
+                .eq(Student::getStuUsername, username)
+                .eq(Student::getStuPassword, password)
                 .list();
-        return list.size()>0?Result.suc(list.get(0)):Result.fail();
+
+        boolean isAuthenticated = !list.isEmpty();
+
+        if (isAuthenticated) {
+            session.removeAttribute("captcha");
+            return Result.suc(list.get(0));
+        } else {
+            return Result.fail();
+        }
     }
+
     //用户注册
     @PostMapping("/register")
     @ApiOperation("用户注册")
