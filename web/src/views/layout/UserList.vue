@@ -426,7 +426,7 @@ export default {
       })
     },
     resetParam () {
-      this.stuNum = ''
+      this.searchQuery = ''
     },
     selectCurrentChange (val) {
       // this.currentRow = val;
