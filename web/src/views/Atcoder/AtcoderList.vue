@@ -75,8 +75,8 @@ export default {
         this.pageNum--
       }
     },
-    loadPost () {
-      this.$axios.post(this.$httpUrl + '/acContest/listPage', {
+    async loadPost () {
+      await this.$axios.post(this.$httpUrl + '/acContest/listPage', {
         pageSize: this.pageSize,
         pageNum: this.pageNum,
         param: {}
@@ -89,8 +89,8 @@ export default {
         }
       })
     },
-    loadInquire () {
-      this.$axios.post(this.$httpUrl + '/acContest/listPage', {
+    async loadInquire () {
+      await this.$axios.post(this.$httpUrl + '/acContest/listPage', {
         pageSize: this.pageSize,
         pageNum: this.pageNum,
         param: {

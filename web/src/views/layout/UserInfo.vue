@@ -16,7 +16,7 @@
         <el-button type="danger" @click="logout">退出登录</el-button>
       </div>
       <div class="option">
-        <el-button type="warning" @click="login">切换用户</el-button>
+        <el-button type="warning" @click="change">切换用户</el-button>
       </div>
     </div>
 
@@ -47,6 +47,18 @@
         </el-tabs>
       </div>
     </div>
+
+    <el-dialog
+      title="警告"
+      :visible.sync="dialogVisible"
+      width="30%"
+      :before-close="handleClose">
+      <span>切换用户将会退出当前用户！</span>
+      <span slot="footer" class="dialog-footer">
+      <el-button @click="dialogVisible = false">取 消</el-button>
+      <el-button type="warning" @click="login">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -65,7 +77,8 @@ export default {
       tableDataAFinal: [],
       tableDataCFinal: [],
       tableDataC: [],
-      tableDataA: []
+      tableDataA: [],
+      dialogVisible: false
     }
   },
   methods: {
@@ -120,6 +133,9 @@ export default {
     login () {
       this.logout()
       this.$router.replace('/LoginIndex')
+    },
+    change () {
+      this.dialogVisible = true
     },
     isAdminOrnot () {
       return this.userInfo.stuMan === '0'

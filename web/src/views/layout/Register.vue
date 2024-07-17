@@ -30,7 +30,7 @@
                   </el-form-item>
                   <el-form-item label="班级" prop="stuClass">
                     <el-input style="width: 200px" type="text" v-model="registerForm.stuClass"
-                              placeholder="请输入4位数字的班级代号" autocomplete="off" size="small" ></el-input>
+                              placeholder="请输入2位的专业名+4位数字的班级代号" autocomplete="off" size="small" ></el-input>
                   </el-form-item>
                   <el-form-item label="学号" prop="stuNum">
                   <el-input style="width: 200px" type="text" v-model="registerForm.stuNum"
@@ -74,10 +74,10 @@ export default {
       }
     }
     const classValidate = (rule, value, callback) => {
-      if (/^\d{4}$/.test(value)) {
+      if (/^\D{2}\d{4}$/.test(value)) {
         callback()
       } else {
-        callback(new Error('请输入4位数字的班级代号'))
+        callback(new Error('请输入2位的专业名+4位数字的班级代号'))
       }
     }
     const stuNumValidate = (rule, value, callback) => {

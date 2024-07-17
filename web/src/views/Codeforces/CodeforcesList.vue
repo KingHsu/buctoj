@@ -61,8 +61,8 @@ export default {
     }
   },
   methods: {
-    fetchContests () {
-      this.$axios.post(this.$httpUrl + '/cfContest/listPage', {
+    async fetchContests () {
+      await this.$axios.post(this.$httpUrl + '/cfContest/listPage', {
         pageSize: this.pageSize,
         pageNum: this.pageNum,
         param: {
@@ -73,13 +73,14 @@ export default {
         if (res.code === 200) {
           this.tableData = res.data
           this.total = res.total
+          this.isShow = true
         } else {
           alert('获取数据失败')
         }
       })
     },
-    loadInquire () {
-      this.$axios.post(this.$httpUrl + '/cfContest/listPage', {
+    async loadInquire () {
+      await this.$axios.post(this.$httpUrl + '/cfContest/listPage', {
         pageSize: this.pageSize,
         pageNum: this.pageNum,
         param: {
