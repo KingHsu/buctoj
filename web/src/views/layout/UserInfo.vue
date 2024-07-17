@@ -5,7 +5,7 @@
         <img src="/img/tx.png" class="avatar">
       </div>
       <div class="text">用户名：{{ userInfo.stuUsername }}</div>
-      <el-button v-if="isAdminOrnot()" round icon="el-icon-user-solid">普通用户</el-button>
+      <el-button v-if="isAdminOrnot()" round icon="el-icon-user-solid" type="success">普通用户</el-button>
       <el-button v-else round icon="el-icon-star-on" type="primary">管理员</el-button>
       <div class="text">姓名：{{ userInfo.stuName }}</div>
       <div class="text">班级：{{ userInfo.stuClass }}</div>

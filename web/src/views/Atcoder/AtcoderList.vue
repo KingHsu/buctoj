@@ -79,9 +79,7 @@ export default {
       this.$axios.post(this.$httpUrl + '/acContest/listPage', {
         pageSize: this.pageSize,
         pageNum: this.pageNum,
-        param: {
-          acContest: this.searchQuery
-        }
+        param: {}
       }).then(res => res.data).then(res => {
         if (res.code === 200) {
           this.tableData = res.data

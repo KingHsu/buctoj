@@ -456,7 +456,7 @@ export default {
           stuNum: this.searchQuery
         }
       }).then(res => res.data).then(res => {
-        console.log(res)
+        // console.log(res)
         if (res.code === 200) {
           this.tableData = res.data
           this.total = res.total

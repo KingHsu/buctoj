@@ -25,8 +25,9 @@ export default {
           text: '用户参加比赛数占比图',
           subtext: 'codeforces'
         },
-        legend: {
-          top: 'bottom'
+        tooltip: {
+          trigger: 'item',
+          formatter: '{b} : {c} ({d}%)'
         },
         toolbox: {
           show: true,
@@ -39,17 +40,20 @@ export default {
         },
         series: [
           {
-            name: 'Nightingale Chart',
+            name: 'Area Mode',
             type: 'pie',
-            radius: [50, 250],
+            radius: [75, 300],
             center: ['50%', '50%'],
-            roseType: 'area',
+            roseType: 'radius',
             itemStyle: {
-              borderRadius: 8
+              borderRadius: 5
             },
-            label: { // 饼图文字显示
-              formatter (ar) {
-                return ar.name + ':' + ar.value + ' ' + ar.percent + '%'
+            label: {
+              show: true
+            },
+            emphasis: {
+              label: {
+                show: true
               }
             },
             data: this.chartDataFinal

@@ -8,12 +8,14 @@
       <el-table-column
         prop="acId"
         label="用户名"
+        align="center"
        >
       </el-table-column>
 
       <el-table-column
         prop="acNewRating"
         label="最新积分"
+        align="center"
         >
       </el-table-column>
 
